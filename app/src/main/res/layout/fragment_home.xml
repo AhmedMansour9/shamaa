@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    tools:context=".Fragments.Home">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarhome"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logoblack"
+                android:id="@+id/logo"
+                />
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_search"
+                android:id="@+id/ic_search"
+                />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/view"
+        android:layout_below="@+id/toolbarhome"
+        android:background="@drawable/tabs_dropshadow" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:id="@+id/PannerCard"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="7dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120sdp"
+                        android:id="@+id/recycler_banner2">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+                <!--<me.relex.circleindicator.CircleIndicator-->
+                    <!--android:id="@+id/view_pager_circle_indicator"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/_48sdp"-->
+                    <!--android:layout_alignBottom="@+id/vp_slider"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--&gt;</me.relex.circleindicator.CircleIndicator>-->
+
+
+            </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/PannerCard"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:id="@+id/T_Category"
+                android:text="@string/category"
+                android:textColor="#000"
+                android:textSize="@dimen/_16sdp"
+                />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_Categroies"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_below="@+id/T_Category"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:scrollbars="horizontal" />
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/recycler_Categroies"-->
+                <!--android:layout_marginStart="@dimen/_10sdp"-->
+                <!--android:layout_marginTop="@dimen/_20sdp"-->
+                <!--android:id="@+id/T_Discover"-->
+                <!--android:text="@string/discovery"-->
+                <!--android:textColor="#000"-->
+                <!--android:textSize="@dimen/_16sdp"-->
+                <!--/>-->
+
+            <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/recycler_Discover"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/_120sdp"-->
+                <!--android:layout_below="@+id/T_Discover"-->
+                <!--android:layout_marginStart="@dimen/_10sdp"-->
+                <!--android:layout_marginEnd="@dimen/_10sdp"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:scrollbars="horizontal" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recycler_Categroies"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:id="@+id/T_BestDiamond"
+                android:text="@string/bestdiamong"
+                android:textColor="#000"
+                android:textSize="@dimen/_16sdp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_BestDiamond"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_below="@+id/T_BestDiamond"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scrollbars="horizontal" />
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+    </ScrollView>
+
+</RelativeLayout>

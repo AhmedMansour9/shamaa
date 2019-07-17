@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign up</string>
+    <string name="fullname">Full Name</string>
+    <string name="email">Email</string>
+    <string name="phone">Mobile Number</string>
+    <string name="national">National ID</string>
+    <string name="password">Password</string>
+    <string name="create">Sign Up</string>
+    <string name="confirmpassword">ConFirm Password</string>
+    <string name="forgetpass">Forget Password</string>
+    <string name="home">Home</string>
+    <string name="favourit">Favourit</string>
+    <string name="cart">Cart</string>
+    <string name="category">Categories</string>
+    <string name="discovery">Discover</string>
+    <string name="bestdiamong">Best Diamond</string>
+    <string name="profile">Profile</string>
+    <string name="edit">Edit</string>
+    <string name="myorders">My Orders</string>
+    <string name="aboutus">About us</string>
+    <string name="contactus">Contact us</string>
+    <string name="setting">Setting </string>
+    <string name="logout">Log out</string>
+    <string name="productdetails">Product Details</string>
+    <string name="minpassword">Password Must be at least 8 letters</string>
+    <string name="insertemail">please Insert Valid Email</string>
+    <string name="matchpass">Password Not Match</string>
+    <string name="emailfailed">Email Or User Name is Used</string>
+    <string name="registersuccess">Successfully Registered</string>
+    <string name="loginsuccess">Login Success</string>
+</resources>

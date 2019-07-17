@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCFCFC"
+    android:id="@+id/ReLa_Profile"
+    tools:context=".Fragments.Profile">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarhome"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logoblack"
+                android:id="@+id/logo"
+                />
+
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/view"
+        android:layout_below="@+id/toolbarhome"
+        android:background="@drawable/tabs_dropshadow" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/view"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/T_Profile"
+        android:text="@string/profile"
+        android:textColor="#000"
+        android:textSize="@dimen/_16sdp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/T_Edit"
+        android:text="@string/edit"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:textColor="#FF8080"
+        android:textSize="@dimen/_16sdp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/T_Profile"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:id="@+id/Rela_Profile"
+        android:background="@drawable/bc_profile"
+        android:layout_height="@dimen/_100sdp">
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/profile"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/profile_image"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/T_ProfileName"
+            android:text="Ahmed Sayed Mansour"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#FF8080"
+            android:textSize="@dimen/_13sdp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/profile_image"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/T_ProfileEmail"
+            android:text="Ahmed @gmail.com"
+            android:layout_below="@+id/T_ProfileName"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/profile_image"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:id="@+id/T_ProfilePhone"
+            android:text="01126763983"
+            android:layout_below="@+id/T_ProfileEmail"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_12sdp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/bcmyprofileproducts"
+        android:layout_below="@+id/Rela_Profile"
+        android:id="@+id/ReLa_MyProducts">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:id="@+id/T_MyProfileOrders"
+            android:text="10 Orders"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#fff"
+            android:textSize="@dimen/_13sdp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_toLeftOf="@+id/T_MyProfileProducts"
+            android:id="@+id/view1"
+            android:background="#fff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:id="@+id/T_MyProfileProducts"
+            android:text="20 Products"
+            android:layout_centerInParent="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="@dimen/_13sdp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_toRightOf="@+id/T_MyProfileProducts"
+            android:id="@+id/view2"
+            android:background="#fff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:id="@+id/T_MyProfilePayMent"
+            android:text="20$ Payed"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="@dimen/_13sdp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/ReLa_MyProducts"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Rela_MyOrders"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/bc_profile"
+        android:layout_height="@dimen/_40sdp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:id="@+id/T_MyOrders"
+            android:text="@string/myorders"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_13sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/ic_menu"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/Rela_MyOrders"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Rela_Aboutus"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/bc_profile"
+        android:layout_height="@dimen/_40sdp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:id="@+id/T_Aboutus"
+            android:text="@string/aboutus"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_13sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/ic_menu"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/Rela_Aboutus"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Rela_Contactus"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/bc_profile"
+        android:layout_height="@dimen/_40sdp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:id="@+id/T_Contactus"
+            android:text="@string/contactus"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_13sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/ic_menu"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/Rela_Contactus"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Rela_Setting"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/bc_profile"
+        android:layout_height="@dimen/_40sdp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:id="@+id/T_Setting"
+            android:text="@string/setting"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_13sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/ic_menu"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/Rela_Setting"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/Rela_Logout"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/bc_profile"
+        android:layout_height="@dimen/_40sdp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:id="@+id/T_Logout"
+            android:text="@string/logout"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="#7E7E7E"
+            android:textSize="@dimen/_13sdp" />
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/ic_menu"
+            />
+
+    </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
