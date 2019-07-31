@@ -33,4 +33,20 @@
     <string name="emailfailed">Email Or User Name is Used</string>
     <string name="registersuccess">Successfully Registered</string>
     <string name="loginsuccess">Login Success</string>
+    <string name="selectcaliber">Select Caliber</string>
+    <string name="selectsize">Select Size</string>
+    <string name="filter">Filtertion</string>
+    <string name="addtocart">Add To Cart</string>
+    <string name="addedtocartsuccess">Product has been Add To Cart</string>
+    <string name="addedtocartexist">Product Already Added To Cart</string>
+    <string name="addtofavourit">Add To Your Favourit</string>
+    <string name="removefromfavourit">Remove From Your Favourit</string>
+    <string name="cartlist">Cart List</string>
+    <string name="items">Items</string>
+    <string name="checkout">Checkout</string>
+    <string name="totalprice">Total Price</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="currency">EGP</string>
+    <string name="nocart">No Items \n added to cart</string>
+    <string name="nofavourit">No Items \n added to favourit</string>
 </resources>

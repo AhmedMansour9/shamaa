@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Products_Response implements Serializable {
 
-    @SerializedName("code")
+    @SerializedName("status")
     @Expose
-    private String code;
+    private Boolean status;
     @SerializedName("message")
     @Expose
     private String message;
@@ -19,12 +19,12 @@ public class Products_Response implements Serializable {
     private List<Products_Model> data = null;
     private final static long serialVersionUID = -2982729079047044791L;
 
-    public String getCode() {
-        return code;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public String getMessage() {

@@ -27,8 +27,12 @@ import android.widget.Toast;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
 import com.shamaa.myapplication.Language;
+import com.shamaa.myapplication.Model.AddToFavourit;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
+import com.shamaa.myapplication.SharedPrefManager;
+import com.shamaa.myapplication.View.DetailsProduct_id;
+import com.shamaa.myapplication.View.SubCategoryid_View;
 import com.shamaa.myapplication.View_Model.Products_ViewModel;
 
 import java.util.List;
@@ -36,7 +40,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Products extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class Products extends Fragment implements DetailsProduct_id,SwipeRefreshLayout.OnRefreshListener {
 
 
     public Products() {
@@ -54,14 +58,14 @@ public class Products extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     GifImageView progross;
     @BindView(R.id.swipe_Products)
     SwipeRefreshLayout swipe_Products;
-
+   String Id,UserToken;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_products, container, false);
         ButterKnife.bind(this,view);
-//        Language();
+        UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
         init();
 
         SwipRefresh();
@@ -77,16 +81,21 @@ public class Products extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         recyclerProducts.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerProducts.setItemAnimator(new DefaultItemAnimator());
         recyclerProducts.setAdapter(products_Adapter);
+        Bundle bundle=getArguments();
+        Id=bundle.getString("id");
     }
     public void Get_products(){
         ReLa_Products.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
-        tripsViewModel.getProduct("1","en",getContext()).observe(this, new Observer<List<Products_Model>>() {
+        tripsViewModel.getProduct(UserToken,Id,"en",getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
-                products_Adapter = new Products_Adapter(tripsData,getActivity());
-                recyclerProducts.setAdapter(products_Adapter);
+                if(tripsData!=null){
+                    products_Adapter = new Products_Adapter(tripsData,getActivity());
+                    products_Adapter.setOnClicklistner(Products.this);
+                    recyclerProducts.setAdapter(products_Adapter);
+                }
                 progross.setVisibility(View.GONE);
                 ReLa_Products.setAlpha(1f);
                 swipe_Products.setRefreshing(false);
@@ -121,5 +130,33 @@ public class Products extends Fragment implements SwipeRefreshLayout.OnRefreshLi
                   Get_products();
             }
         });
+    }
+
+
+    @Override
+    public void Details(Products_Model products_model) {
+        Details_Product detailsHomeProductFragment=new Details_Product();
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("details",products_model);
+        detailsHomeProductFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().add(R.id.Rela_Home,detailsHomeProductFragment)
+                .addToBackStack(null).commit();
+
+    }
+
+    @Override
+    public void AddToFavourit(String Productid) {
+
+        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
+        tripsViewModel.AddToFavourit(UserToken,Productid,"en",getContext()).observe(Products.this, new Observer<AddToFavourit>() {
+            @Override
+            public void onChanged(@Nullable AddToFavourit tripsData) {
+                if(tripsData!=null) {
+
+
+                }
+            }
+        });
+
     }
 }

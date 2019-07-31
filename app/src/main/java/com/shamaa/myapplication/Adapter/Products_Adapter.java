@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -23,7 +24,10 @@ import com.bumptech.glide.request.target.Target;
 import com.shamaa.myapplication.Model.Product_Details;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
+import com.shamaa.myapplication.View.DetailsProduct_id;
+import com.shamaa.myapplication.View.SubCategoryid_View;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,29 +40,31 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
     private List<Products_Model> filteredList=new ArrayList<>();
     View itemView;
     Context con;
-//    Details_Sparts details_sparts;
-//    phone_view phoneView;
+    DetailsProduct_id detailsProduct_id;
+    double value,value2;
     String Price;
 //    ListUnitDetails_View listUnitDetails_view;
     List<Products_Model> list=new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView Address,Price,Distance_Area,T_Date,Title,T_Type,Text_RegularPrice;
+        private TextView T_title,Price,T_Caliber,T_Price,T_OfferPrice,T_Offer;
         private Button Callnow,Details;
-        private ImageView Image_Unit,call;
+        private ImageView Image_Unit,Img_Favourit,img_product;
         private ProgressBar ProgrossSpare;
         private ImageView person_image,Starone,Startwo,StarThree,StarFour,StarFive;
         RelativeLayout Rela_Product;
 
         public MyViewHolder(View view) {
             super(view);
-//            Address=view.findViewById(R.id.Address);
-//            Price=view.findViewById(R.id.Price);
-//            Distance_Area=view.findViewById(R.id.Distance_Area);
-//            T_Date=view.findViewById(R.id.T_Date);
-            Title=view.findViewById(R.id.Title);
+            T_Caliber=view.findViewById(R.id.T_Caliber);
+            T_Price=view.findViewById(R.id.T_Price);
+            T_OfferPrice=view.findViewById(R.id.T_OfferPrice);
+            img_product=view.findViewById(R.id.img_product);
+            T_title=view.findViewById(R.id.T_title);
             ProgrossSpare=view.findViewById(R.id.progross);
             Rela_Product=view.findViewById(R.id.Rela_Product);
+            Img_Favourit=view.findViewById(R.id.Img_Favourit);
+            T_Offer=view.findViewById(R.id.T_Offer);
 
         }
     }
@@ -71,10 +77,10 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
         this.filteredList=list;
 
     }
-//    public void setClickListener(ListUnitDetails_View listUnitDetails_view) {
-//        this.listUnitDetails_view = listUnitDetails_view;
-//
-//    }
+    public void setOnClicklistner(DetailsProduct_id product_id){
+        this.detailsProduct_id=product_id;
+    }
+
 
     @Override
     public Products_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -86,8 +92,26 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onBindViewHolder(final Products_Adapter.MyViewHolder holder, final int position) {
+      holder.T_title.setText(filteredList.get(position).getName());
+        holder.T_Caliber.setText(filteredList.get(position).getCaliber());
+        value = Double.parseDouble(filteredList.get(position).getOriginalPrice());
+        value2 = Double.parseDouble(filteredList.get(position).getSalesPrice());
+        value2 =Double.parseDouble(new DecimalFormat("##.####").format(value2));
+        value =Double.parseDouble(new DecimalFormat("##.####").format(value));
+        holder.T_OfferPrice.setText(String.valueOf(value2));
+        holder.T_OfferPrice.setPaintFlags(holder.T_OfferPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 
+        holder.T_Price.setText(String.valueOf(value)+con.getResources().getString(R.string.currency));
+
+
+
+         if(!filteredList.get(position).getOffer().equals("0")){
+             holder.T_Offer.setVisibility(View.VISIBLE);
+             holder.T_Offer.setText(filteredList.get(position).getOffer());
+         }else {
+             holder.T_Offer.setVisibility(View.GONE);
+         }
         if(position%2 == 0){
             LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
                     new LinearLayout.LayoutParams(
@@ -107,10 +131,52 @@ public class Products_Adapter extends RecyclerView.Adapter<Products_Adapter.MyVi
             holder.Rela_Product.requestLayout();
 
         }
+        if(filteredList.get(position).getFavorite().equals("1")){
+            holder.Img_Favourit.setBackgroundResource(R.drawable.ic_favouritheart);
+        }else {
+            holder.Img_Favourit.setBackgroundResource(R.drawable.ic_favourit);
+        }
 
+        holder.Img_Favourit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(filteredList.get(position).getFavorite().equals("1")){
+                    filteredList.get(position).setFavorite("0");
+                    holder.Img_Favourit.setBackgroundResource(R.drawable.ic_favourit);
+                    detailsProduct_id.AddToFavourit(String.valueOf(filteredList.get(position).getId()));
+                }else {
+                    filteredList.get(position).setFavorite("1");
+                    holder.Img_Favourit.setBackgroundResource(R.drawable.ic_favouritheart);
+                    detailsProduct_id.AddToFavourit(String.valueOf(filteredList.get(position).getId()));
 
+                }
+            }
+        });
+        String i = filteredList.get(position).getPhoto();
+        Uri u = Uri.parse(i);
 
-
+        Glide.with(con)
+                .load("http://emarketingbakers.com/shama/public/uploads/topics/"+ u)
+                .apply(new RequestOptions().override(500, 500))
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                            holder.ProgrossSpare.setVisibility(View.GONE);
+                        return false;
+                    }
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                            holder.ProgrossSpare.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .into(holder.img_product);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                detailsProduct_id.Details(filteredList.get(position));
+            }
+        });
 
     }
 

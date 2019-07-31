@@ -12,7 +12,7 @@
         android:layout_marginBottom="@dimen/_5sdp"
         android:id="@+id/favourit"
         android:layout_marginTop="@dimen/_5sdp"
-        android:src="@drawable/ic_favourit"
+        android:src="@drawable/ic_tab_favourit"
         android:layout_gravity="center_horizontal" />
 
     <!--<TextView-->

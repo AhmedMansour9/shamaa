@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/bc_rowproduct"
+    android:id="@+id/Rela_Product"
+    android:layout_height="@dimen/_100sdp">
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="#000"
+        android:text="Ahmed Mansour"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_toEndOf="@+id/img_product"
+        android:maxLines="1"
+        android:id="@+id/T_title"
+        />
+    <ImageView
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/delete"
+        android:id="@+id/img_delete"
+        />
+    <ImageView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/diamong"
+        android:id="@+id/img_product"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_toEndOf="@+id/img_product"
+        android:textColor="#CECECE"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:text="Ahmed Mansour"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:layout_below="@+id/T_title"
+        android:id="@+id/T_Caliber"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:textColor="#FF8080"
+        android:text="3000 $"
+        android:maxLines="1"
+        android:layout_below="@+id/T_Caliber"
+        android:id="@+id/T_Price"
+        android:layout_toEndOf="@+id/img_product"
+        />
+
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_below="@+id/T_Caliber"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/plus"
+        android:id="@+id/T_Plus"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/T_Caliber"
+        android:id="@+id/T_Counter"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_toStartOf="@+id/T_Plus"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="1"
+        />
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_below="@+id/T_Caliber"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/minus"
+        android:layout_toStartOf="@+id/T_Counter"
+        android:id="@+id/T_Minus"
+        />
+
+
+    <ProgressBar
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:id="@+id/progross"
+        android:visibility="invisible"
+        />
+</RelativeLayout>

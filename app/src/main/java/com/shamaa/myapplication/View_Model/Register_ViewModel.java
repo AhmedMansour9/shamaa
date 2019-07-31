@@ -26,11 +26,10 @@ public class Register_ViewModel extends ViewModel {
     private MutableLiveData<Register_Details> regist;
     String Error;
     public LiveData<Register_Details> getRegister(UserRegister user, Context context) {
-        if (regist == null) {
             regist = new MutableLiveData<Register_Details>();
             this.context=context;
             register(user);
-        }
+
         return regist;
     }
 

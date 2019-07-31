@@ -26,19 +26,16 @@ public class Categories_ViewModel  extends ViewModel {
     private MutableLiveData<List<Categories>> tripList;
 
     public LiveData<List<Categories>> getCetgroies(String usertoken,String Lang, Context context) {
-        if (tripList == null) {
             tripList = new MutableLiveData<List<Categories>>();
             this.context=context;
             getProducts(Lang,usertoken);
-        }
+
         return tripList;
     }
     public LiveData<List<Categories>> getSubCetgroies(String usertoken,String Lang, Context context,String id) {
-        if (tripList == null) {
             tripList = new MutableLiveData<List<Categories>>();
             this.context=context;
             getSubCategories(Lang,usertoken,id);
-        }
         return tripList;
     }
 

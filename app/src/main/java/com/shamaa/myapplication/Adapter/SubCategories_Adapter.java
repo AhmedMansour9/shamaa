@@ -23,6 +23,7 @@ import com.bumptech.glide.request.target.Target;
 import com.shamaa.myapplication.Model.Categories;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
+import com.shamaa.myapplication.View.SubCategoryid_View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +37,8 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
     private List<Categories> filteredList=new ArrayList<>();
     View itemView;
     Context con;
-    //    Details_Sparts details_sparts;
-//    phone_view phoneView;
+    SubCategoryid_View subCategoryid_view;
     String Price;
-    //    ListUnitDetails_View listUnitDetails_view;
     List<Categories> list=new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -56,7 +55,7 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
 //            Price=view.findViewById(R.id.Price);
 //            Distance_Area=view.findViewById(R.id.Distance_Area);
 //            T_Date=view.findViewById(R.id.T_Date);
-            Title=view.findViewById(R.id.Title);
+            Title=view.findViewById(R.id.T_title);
             ProgrossSpare=view.findViewById(R.id.progross);
             Rela_Product=view.findViewById(R.id.Rela_Product);
             img_subcategories=view.findViewById(R.id.img_subcategories);
@@ -72,11 +71,9 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
         this.filteredList=list;
 
     }
-//    public void setClickListener(ListUnitDetails_View listUnitDetails_view) {
-//        this.listUnitDetails_view = listUnitDetails_view;
-//
-//    }
-
+    public void setOnClicklistner(SubCategoryid_View product_id){
+        this.subCategoryid_view=product_id;
+    }
     @Override
     public SubCategories_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
@@ -129,7 +126,12 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
                     }
                 })
                 .into(holder.img_subcategories);
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                subCategoryid_view.id(filteredList.get(position).getId());
+            }
+        });
 
 
 

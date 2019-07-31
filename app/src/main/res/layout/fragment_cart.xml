@@ -1,14 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".Fragments.Cart">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarhome"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logoblack"
+                android:id="@+id/logo"
+                />
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/_40sdp"-->
+            <!--android:layout_height="@dimen/_20sdp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/ic_search"-->
+            <!--android:id="@+id/ic_search"-->
+            <!--/>-->
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@+id/toolbarhome"
+        android:id="@+id/ReLative_Products"
+        >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/view"
+            android:background="@drawable/tabs_dropshadow" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/T_Title"
+        android:text="@string/cartlist"
+        android:textColor="#000"
+        android:textSize="@dimen/_16sdp"
+        />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_Products"
+        android:layout_below="@+id/T_Title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_350sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_Cart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_280sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:visibility="gone"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:scrollbars="horizontal" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/Btn_Checkout"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/Total_Price"
+            android:text="2000"
+            android:textColor="#000"
+            android:textSize="@dimen/_13sdp"
+            android:visibility="gone"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/Btn_Checkout"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="@string/subtotal"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="#000"
+            android:visibility="gone"
+            android:id="@+id/title"
+            />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:background="#FF8080"
+        android:text="@string/checkout"
+        android:textColor="#fff"
+        android:id="@+id/Btn_Checkout"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp" />
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_cart_empty"
+            android:id="@+id/img_cart"
+            />
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/img_cart"
+              android:layout_centerHorizontal="true"
+              android:layout_marginTop="@dimen/_10sdp"
+              android:id="@+id/nocart"
+              android:textColor="#CFCFCF"
+              android:text="@string/nocart"
+              android:gravity="center"
+              android:textSize="@dimen/_15sdp"
+
+              />
+    </RelativeLayout>
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/progross"
+        android:id="@+id/progross"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        />
+
+
+</RelativeLayout>

@@ -32,14 +32,17 @@ public class Filtertion extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_filtertion, container, false);
-        // get seekbar from view
-        final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) view.findViewById(R.id.rangeSeekbar5);
+         initPrices();
 
-// get min and max text view
+
+        return view;
+    }
+
+    public void initPrices(){
         final TextView tvMin = (TextView) view.findViewById(R.id.textMin1);
         final TextView tvMax = (TextView) view.findViewById(R.id.textMax1);
+        final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) view.findViewById(R.id.rangeSeekbar5);
 
-// set listener
         rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
@@ -48,15 +51,11 @@ public class Filtertion extends Fragment {
             }
         });
 
-// set final value listener
         rangeSeekbar.setOnRangeSeekbarFinalValueListener(new OnRangeSeekbarFinalValueListener() {
             @Override
             public void finalValue(Number minValue, Number maxValue) {
                 Log.d("CRS=>", String.valueOf(minValue) + " : " + String.valueOf(maxValue));
             }
         });
-
-        return view;
     }
-
 }

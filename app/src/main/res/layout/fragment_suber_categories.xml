@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
     tools:context=".Fragments.Products">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="#FCFCFC"
 
-        android:id="@+id/ReLative_Products"
+        android:id="@+id/ReLative_SubCategories"
         android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarproduct"
@@ -68,7 +70,7 @@
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_70sdp"
         android:src="@drawable/progross"
-        android:id="@+id/progross"
+        android:id="@+id/progrossSubCategory"
         android:visibility="gone"
         android:layout_centerInParent="true"
         />

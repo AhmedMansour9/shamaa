@@ -25,11 +25,10 @@ public class Banners_ViewModel  extends ViewModel {
     private MutableLiveData<List<Banners>> tripList;
 
     public LiveData<List<Banners>> getBanners(String usertoken, String Lang, Context context) {
-        if (tripList == null) {
             tripList = new MutableLiveData<List<Banners>>();
             this.context=context;
             getBanner(Lang,usertoken);
-        }
+
         return tripList;
     }
 

@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ffffff"
+    android:id="@+id/Rela_Home"
+    android:clickable="true"
     tools:context=".Fragments.Home">
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarhome"
@@ -24,50 +27,58 @@
                 android:id="@+id/logo"
                 />
 
-            <ImageView
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_search"
-                android:id="@+id/ic_search"
-                />
+            <!--<ImageView-->
+                <!--android:layout_width="@dimen/_40sdp"-->
+                <!--android:layout_height="@dimen/_20sdp"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:src="@drawable/ic_search"-->
+                <!--android:id="@+id/ic_search"-->
+                <!--/>-->
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:id="@+id/view"
-        android:layout_below="@+id/toolbarhome"
-        android:background="@drawable/tabs_dropshadow" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_below="@+id/view"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/toolbarhome"
+        android:background="#ffffff"
+        android:id="@+id/Scroll_Home"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/view"
+                android:background="@drawable/tabs_dropshadow" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp"
                 android:id="@+id/PannerCard"
+                android:layout_below="@+id/view"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="7dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                        android:id="@+id/swipe_Banners"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:layout_height="@dimen/_120sdp"
                         android:id="@+id/recycler_banner2">
 
                     </androidx.recyclerview.widget.RecyclerView>
 
+                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
                 <!--<me.relex.circleindicator.CircleIndicator-->
                     <!--android:id="@+id/view_pager_circle_indicator"-->
@@ -140,12 +151,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_BestDiamond"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
+                android:layout_height="@dimen/_250sdp"
                 android:layout_below="@+id/T_BestDiamond"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:scrollbars="horizontal" />
+                />
 
 
 
@@ -158,4 +169,13 @@
 
     </ScrollView>
 
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/progross"
+        android:id="@+id/progross_home"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>
