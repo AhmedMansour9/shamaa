@@ -1,19 +1,33 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.shamaa.myapplication.Activities.MainActivity;
+import com.shamaa.myapplication.Adapter.SubCategories_Adapter;
+import com.shamaa.myapplication.Model.Categories;
+import com.shamaa.myapplication.Model.Profile_Details;
 import com.shamaa.myapplication.R;
+import com.shamaa.myapplication.SharedPrefManager;
+import com.shamaa.myapplication.View_Model.Categories_ViewModel;
+import com.shamaa.myapplication.View_Model.Profile_ViewModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +48,8 @@ public class Profile extends Fragment {
     TextView T_Setting;
     @BindView(R.id.T_Logout)
     TextView T_Logout;
+    @BindView(R.id.Rela_Logout)
+    RelativeLayout Rela_Logout;
     @BindView(R.id.T_ProfileName)
     TextView T_ProfileName;
     @BindView(R.id.T_ProfileEmail)
@@ -48,23 +64,43 @@ public class Profile extends Fragment {
     TextView T_MyProfilePayMent;
     @BindView(R.id.T_Edit)
     TextView T_Edit;
-
+    @BindView(R.id.Rela_Contactus)
+    RelativeLayout Rela_Contactus;
+    Profile_ViewModel profile_viewModel;
     View view;
+    String User_Token;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this,view);
+        User_Token=SharedPrefManager.getInstance(getContext()).getUserToken();
          ChangeFont();
+         Get_Profle();
         T_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Filtertion()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Edit_Profile()).commit();
 
             }
         });
+        Rela_Contactus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Contact_Us()).commit();
 
+            }
+        });
+        Rela_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPrefManager.getInstance(getContext()).saveUserToken(null);
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+
+            }
+        });
         return view;
     }
 
@@ -83,5 +119,29 @@ public class Profile extends Fragment {
         T_MyProfilePayMent.setTypeface( customFontBold );
         T_Edit.setTypeface( customFontBold );
 
+    }
+
+    public void getInformation(){
+
+
+    }
+
+    public void Get_Profle(){
+        profile_viewModel = ViewModelProviders.of(this).get(Profile_ViewModel.class);
+        profile_viewModel.getProfile(User_Token,"en",getContext()).observe(this, new Observer<List<Profile_Details>>() {
+            @Override
+            public void onChanged(@Nullable List<Profile_Details> tripsData) {
+                if(tripsData!=null) {
+                    T_MyProfileOrders.setText(tripsData.get(0).getTotalOrder() + " " + getActivity().getResources().getString(R.string.orders));
+                    T_MyProfileProducts.setText(tripsData.get(0).getTotalProduct() + " " + getActivity().getResources().getString(R.string.products));
+                    T_MyProfilePayMent.setText(tripsData.get(0).getPaid() + " " + "$");
+                    T_ProfileName.setText(tripsData.get(0).getName() );
+                    T_ProfileEmail.setText(tripsData.get(0).getEmail());
+                    T_ProfilePhone.setText(tripsData.get(0).getPhone());
+
+
+                }
+            }
+        });
     }
 }

@@ -32,10 +32,25 @@ public class Products_ViewModel extends ViewModel {
 
         return tripList;
     }
+    public LiveData<List<Products_Model>> getFilterProduct(String User,String man,String style_id,String type_cliber,String max_price
+            ,String min_price,String Lang,Context context) {
+        tripList = new MutableLiveData<List<Products_Model>>();
+        this.context=context;
+        getFilterProducts(User,man,style_id,type_cliber,max_price,min_price,Lang);
+
+        return tripList;
+    }
     public LiveData<List<Products_Model>> getFavourit(String User,String Lang,Context context) {
             tripList = new MutableLiveData<List<Products_Model>>();
             this.context=context;
             getFavourit(Lang,User);
+
+        return tripList;
+    }
+    public LiveData<List<Products_Model>> getDiamondss(String User,String Lang,Context context) {
+        tripList = new MutableLiveData<List<Products_Model>>();
+        this.context=context;
+        getDiamond(Lang,User);
 
         return tripList;
     }
@@ -71,6 +86,38 @@ public class Products_ViewModel extends ViewModel {
             }
         });
     }
+    public void getFilterProducts(String User_token,String man,String style_id,String type_cliber,String max_price
+            ,String min_price, String lang) {
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("lang", lang);
+        hashMap.put("type_men", man);
+        if(style_id!=null) {
+            hashMap.put("style_id", style_id);
+        }
+        hashMap.put("type_cliber", type_cliber);
+        hashMap.put("max_price", max_price);
+        hashMap.put("min_price", min_price);
+        Apiinterface service = ApiCLint.getClient().create(Apiinterface.class);
+        Call<Products_Response> call = service.GetFilterProducts(hashMap,"Bearer "+User_token);
+        call.enqueue(new Callback<Products_Response>() {
+            @Override
+            public void onResponse(Call<Products_Response> call, Response<Products_Response> response) {
+
+                if (response.code()==200) {
+                    tripList.setValue(response.body().getData());
+                } else  {
+                    tripList.setValue(null);
+                }
+
+            }
+            @Override
+            public void onFailure(Call<Products_Response> call, Throwable t) {
+                tripList.setValue(null);
+            }
+        });
+    }
+
 
     public void getFavourit(String lang,String User_token) {
         HashMap<String, String> hashMap = new HashMap<>();
@@ -96,6 +143,29 @@ public class Products_ViewModel extends ViewModel {
         });
     }
 
+    public void getDiamond(String lang,String User_token) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("lang", lang);
+
+        Apiinterface service = ApiCLint.getClient().create(Apiinterface.class);
+        Call<Products_Response> call = service.GetDiamond(hashMap,"Bearer "+User_token);
+        call.enqueue(new Callback<Products_Response>() {
+            @Override
+            public void onResponse(Call<Products_Response> call, Response<Products_Response> response) {
+
+                if (response.code()==200) {
+                    tripList.setValue(response.body().getData());
+                } else  {
+                    tripList.setValue(null);
+                }
+
+            }
+            @Override
+            public void onFailure(Call<Products_Response> call, Throwable t) {
+                tripList.setValue(null);
+            }
+        });
+    }
     public void getAddToFavourit(String Page, String lang,String User_token) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("lang", lang);

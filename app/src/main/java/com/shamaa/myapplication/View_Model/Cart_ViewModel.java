@@ -26,8 +26,8 @@ public class Cart_ViewModel   extends ViewModel {
 
     public LiveData<List<CartDetails>> getCart(String User, String Lang, Context context) {
             tripList = new MutableLiveData<List<CartDetails>>();
-            this.context=context;
-            getcart(Lang,User);
+            this.context = context;
+            getcart(Lang, User);
 
         return tripList;
     }

@@ -34,11 +34,10 @@ public class Register_ViewModel extends ViewModel {
     }
 
     public LiveData<Register_Details> getLogin(UserRegister user, Context context) {
-        if (regist == null) {
             regist = new MutableLiveData<Register_Details>();
             this.context=context;
             login(user);
-        }
+
         return regist;
     }
 

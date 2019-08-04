@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -28,11 +29,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.shamaa.myapplication.Activities.MainActivity;
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Banner_Adapter;
 import com.shamaa.myapplication.Adapter.BannersProduct_Adapter;
+import com.shamaa.myapplication.Adapter.Cart_Adapter;
 import com.shamaa.myapplication.Adapter.SubCategories_Adapter;
+import com.shamaa.myapplication.Language;
 import com.shamaa.myapplication.Model.AddToCart_Response;
+import com.shamaa.myapplication.Model.CartDetails;
 import com.shamaa.myapplication.Model.Categories;
 import com.shamaa.myapplication.Model.DetailsProduct;
 import com.shamaa.myapplication.Model.Products_Model;
@@ -42,6 +48,7 @@ import com.shamaa.myapplication.Model.Style_Details;
 import com.shamaa.myapplication.R;
 import com.shamaa.myapplication.SharedPrefManager;
 import com.shamaa.myapplication.View_Model.AddToCart_ViewModel;
+import com.shamaa.myapplication.View_Model.Cart_ViewModel;
 import com.shamaa.myapplication.View_Model.Categories_ViewModel;
 import com.shamaa.myapplication.View_Model.DetailsProduct_ViewModel;
 import com.shamaa.myapplication.View_Model.Stylestbyid_ViewModel;
@@ -59,6 +66,8 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
     public Details_Product() {
         // Required empty public constructor
     }
+    String Lang;
+    Cart_ViewModel tripsViewModel;
     @BindView(R.id.T_Price)
     TextView T_Price;
     @BindView(R.id.T_Claiber)
@@ -82,6 +91,10 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
     String Product_id;
     @BindView(R.id.Btn_AddCart)
     Button Btn_AddCart;
+    @BindView(R.id.ratingBar)
+    AppCompatRatingBar ratingBar;
+    @BindView(R.id.T_TotalRate)
+    TextView T_TotalRate;
     Stylestbyid_ViewModel stylestbyid_viewModel;
     DetailsProduct_ViewModel detailsProduct_viewModel;
     BannersProduct_Adapter bannersProduct_adapter;
@@ -118,6 +131,8 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_details__product, container, false);
         ButterKnife.bind(this,view);
+        tripsViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
+        Language();
         getData();
         SwipRefresh();
         AddtoCart();
@@ -134,6 +149,10 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
             T_Claiber.setText(products_model.getCaliber());
             T_Details.setText(products_model.getDetails());
             Product_id=String.valueOf(products_model.getId());
+            if(products_model.getTotalRateAv()!=null){
+                ratingBar.setRating(Integer.parseInt(products_model.getTotalRateAv()));
+            }
+            T_TotalRate.setText(products_model.getRate()+" "+getActivity().getResources().getString(R.string.review));
         }
     }
     public void SwipRefresh(){
@@ -157,7 +176,7 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
         Scroll_Details.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         stylestbyid_viewModel = ViewModelProviders.of(this).get(Stylestbyid_ViewModel.class);
-        stylestbyid_viewModel.getSizes(Product_id,User_Token,"en",getContext()).observe(this, new Observer<List<Sizes>>() {
+        stylestbyid_viewModel.getSizes(Product_id,User_Token,Lang,getContext()).observe(this, new Observer<List<Sizes>>() {
             @Override
             public void onChanged(@Nullable List<Sizes> tripsData) {
                 Scroll_Details.setAlpha(1);
@@ -200,7 +219,7 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
 
     public void GetStylest(){
         stylestbyid_viewModel = ViewModelProviders.of(this).get(Stylestbyid_ViewModel.class);
-        stylestbyid_viewModel.getType(Product_id,User_Token,"en",getContext()).observe(this, new Observer<List<Style_Details>>() {
+        stylestbyid_viewModel.getType(Product_id,User_Token,Lang,getContext()).observe(this, new Observer<List<Style_Details>>() {
             @Override
             public void onChanged(@Nullable List<Style_Details> tripsData) {
                 if(tripsData!=null) {
@@ -246,7 +265,7 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
     }
     public void GetBanners(){
         detailsProduct_viewModel = ViewModelProviders.of(this).get(DetailsProduct_ViewModel.class);
-        detailsProduct_viewModel.getDetailsProduct(User_Token,Product_id,"en",getContext()).observe(this, new Observer<List<DetailsProduct>>() {
+        detailsProduct_viewModel.getDetailsProduct(User_Token,Product_id,Lang,getContext()).observe(this, new Observer<List<DetailsProduct>>() {
             @Override
             public void onChanged(@Nullable List<DetailsProduct> tripsData) {
                 if (tripsData != null) {
@@ -256,14 +275,15 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                     recycler_banner2.setLayoutManager(linearLayoutManager);
                     recycler_banner2.setAdapter(bannersProduct_adapter);
-                    Timer swipeTimer = new Timer();
-                    swipeTimer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            handler.post(update);
-                        }
-                    }, 2000, 2000);
-
+                    if(listBanners.size()>1) {
+                        Timer swipeTimer = new Timer();
+                        swipeTimer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                handler.post(update);
+                            }
+                        }, 2000, 2000);
+                    }
                 }
 
             }
@@ -287,12 +307,26 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
                         progross.setVisibility(View.GONE);
                       String Message=addToCart_viewModel.GetMessage();
                       if(Message!=null) {
-                          if (Message.equals("User add Cart successfully")) {
+                          if (Message.equals("User add Cart successfully.")) {
                               Toast.makeText(getContext(), "" + getResources().getString(R.string.addedtocartsuccess), Toast.LENGTH_SHORT).show();
 
+                              tripsViewModel.getCart(User_Token,Lang,getContext()).observe(getActivity(), new Observer<List<CartDetails>>() {
+                                  @Override
+                                  public void onChanged(@Nullable List<CartDetails> tripsData) {
+                                      TabLayout.Tab tab = TabsLayouts.tabLayout.getTabAt(2); // fourth tab
+                                      View tabView = tab.getCustomView();
+                                      TextView textView = tabView.findViewById(R.id.cartt);
+                                      if(tripsData!=null) {
+                                          textView.setVisibility(View.VISIBLE);
+                                          textView.setText(String.valueOf(tripsData.size()));
+
+                                      }else {
+                                          textView.setVisibility(View.GONE);
+                                      }
+                                  }
+                              });
                           } else if (Message.equals(" Has been added to Cart ")) {
                               Toast.makeText(getContext(), "" + getResources().getString(R.string.addedtocartexist), Toast.LENGTH_SHORT).show();
-
                           }
                       }
 
@@ -312,4 +346,13 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
         GetStylest();
 
     }
+    public void Language(){
+        if(Language.isRTL()){
+            Lang="he";
+        }else {
+            Lang="en";
+        }
+
+    }
 }
+

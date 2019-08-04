@@ -4,7 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:id="@+id/Rela_Cart"
     tools:context=".Fragments.Cart">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ReLative_Products"
+        >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarhome"
         android:layout_width="match_parent"
@@ -34,16 +40,12 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toolbarhome"
-        android:id="@+id/ReLative_Products"
-        >
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:id="@+id/view"
+            android:layout_below="@+id/toolbarhome"
             android:background="@drawable/tabs_dropshadow" />
 
     <TextView
@@ -51,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/toolbarhome"
         android:id="@+id/T_Title"
         android:text="@string/cartlist"
         android:textColor="#000"
@@ -70,7 +73,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_280sdp"
         android:layout_marginStart="@dimen/_10sdp"
-        android:visibility="gone"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:scrollbars="horizontal" />

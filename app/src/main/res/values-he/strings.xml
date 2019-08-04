@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Application</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">התחברות</string>
+    <string name="signup">Sign up</string>
+    <string name="fullname">הירשם</string>
+    <string name="email">דוא"ל</string>
+    <string name="phone">מספר טלפון נייד</string>
+    <string name="national">מספר טלפון נייד</string>
+    <string name="password">סיסמה</string>
+    <string name="create">סיסמה</string>
+    <string name="confirmpassword">אשר סיסמה</string>
+    <string name="forgetpass">אשר סיסמה</string>
+    <string name="home">בית</string>
+    <string name="favourit">פייבוריט</string>
+    <string name="cart">עגלה</string>
+    <string name="category">קטגוריות</string>
+    <string name="discovery">Discover</string>
+    <string name="bestdiamong">היהלום הטוב ביותר</string>
+    <string name="profile">פרופיל</string>
+    <string name="edit">ערוך</string>
+    <string name="myorders">ההזמנות שלי</string>
+    <string name="aboutus">ההזמנות שלי</string>
+    <string name="contactus">תיצור איתנו קשר</string>
+    <string name="setting">הגדרה </string>
+    <string name="logout">להתנתק</string>
+    <string name="productdetails">פרטי מוצר</string>
+    <string name="minpassword">סיסמא חייבת להיות לפחות 8 אותיות</string>
+    <string name="insertemail">אנא הכנס דוא"ל תקף</string>
+    <string name="matchpass">סיסמא לא תואמת</string>
+    <string name="emailfailed">משתמשים בדוא"ל או בשם המשתמש</string>
+    <string name="registersuccess">נרשם בהצלחת</string>
+    <string name="loginsuccess">הצלחה בכניסה</string>
+    <string name="selectcaliber">בחר קליבר</string>
+    <string name="selectsize">בחר מידה</string>
+    <string name="filter">סינון</string>
+    <string name="addtocart">הוסף לעגלה</string>
+    <string name="addedtocartsuccess">המוצר הוסף לסל</string>
+    <string name="addedtocartexist">מוצר שכבר נוסף לעגלה</string>
+    <string name="addtofavourit">הוסף למועדף שלך</string>
+    <string name="removefromfavourit">הסר מהמועדף שלך</string>
+    <string name="cartlist">רשימת עגלות</string>
+    <string name="items">פריטים</string>
+    <string name="checkout">לבדוק</string>
+    <string name="totalprice">מחיר סופי</string>
+    <string name="subtotal">רמה חלקית</string>
+    <string name="currency">EGP</string>
+    <string name="nocart">אין פריטים \ n שנוספו לעגלה</string>
+    <string name="nofavourit">אין פריטים \ שלא נוספו למועדפים</string>
+    <string name="review">אנשים בודקים מוצר זה</string>
+    <string name="presstoreload">Press To Reload</string>
+    <string name="women">לנשים</string>
+    <string name="men">לגברים</string>
+    <string name="filteeer">סנן</string>
+    <string name="search">לחפש</string>
+    <string name="city">עיר</string>
+    <string name="address">כתובת</string>
+    <string name="cotune">המשך</string>
+    <string name="cash">כסף מזומן</string>
+    <string name="debit">ויזה</string>
+
+
+</resources>

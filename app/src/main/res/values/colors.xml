@@ -7,4 +7,5 @@
     <color name="defult_login_color">#D1D1D1</color>
     <color name="tab_background_selected">#FF8080</color>
     <color name="tab_background_unselected">@android:color/transparent</color>
+    <color name="white">#fff</color>
 </resources>

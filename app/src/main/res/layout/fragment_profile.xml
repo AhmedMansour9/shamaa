@@ -153,12 +153,12 @@
             android:textStyle="bold"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textColor="#fff"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_10sdp" />
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_toLeftOf="@+id/T_MyProfileProducts"
+            android:layout_toStartOf="@+id/T_MyProfileProducts"
             android:id="@+id/view1"
             android:background="#fff" />
 
@@ -172,12 +172,12 @@
             android:maxLines="1"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_10sdp" />
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_toRightOf="@+id/T_MyProfileProducts"
+            android:layout_toEndOf="@+id/T_MyProfileProducts"
             android:id="@+id/view2"
             android:background="#fff" />
         <TextView
@@ -192,7 +192,7 @@
             android:maxLines="1"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="@dimen/_13sdp" />
+            android:textSize="@dimen/_10sdp" />
 
     </RelativeLayout>
 

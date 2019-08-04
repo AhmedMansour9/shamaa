@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/Rela_Home"
     android:clickable="true"
+    android:background="#fff"
     tools:context=".Fragments.Home">
 
 
@@ -141,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/recycler_Categroies"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:id="@+id/T_BestDiamond"
                 android:text="@string/bestdiamong"
                 android:textColor="#000"

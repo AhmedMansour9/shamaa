@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shamaa.myapplication.Adapter.Products_Adapter;
@@ -50,6 +51,8 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
     RecyclerView recyclerProducts;
     Products_Adapter products_Adapter;
     List<Products_Model> tripsData;
+    @BindView(R.id.T_Filtertion)
+    TextView T_Filtertion;
     View view;
     Products_ViewModel tripsViewModel;
     @BindView(R.id.ReLative_Products)
@@ -59,6 +62,9 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
     @BindView(R.id.swipe_Products)
     SwipeRefreshLayout swipe_Products;
    String Id,UserToken;
+    String Type_id,Style_id,minprice,maxprice,man;
+    Boolean getValue;
+    String Lang;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +72,7 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
         view= inflater.inflate(R.layout.fragment_products, container, false);
         ButterKnife.bind(this,view);
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
+        Language();
         init();
 
         SwipRefresh();
@@ -82,13 +89,34 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
         recyclerProducts.setItemAnimator(new DefaultItemAnimator());
         recyclerProducts.setAdapter(products_Adapter);
         Bundle bundle=getArguments();
-        Id=bundle.getString("id");
+         getValue= getArguments().getBoolean("BOOLEAN_VALUE");
+       if(getValue){
+           Type_id=getArguments().getString("type_cliber");
+           Style_id=getArguments().getString("style_id");
+           minprice=getArguments().getString("minprice");
+           man=getArguments().getString("man");
+           maxprice=getArguments().getString("maxprice");
+       }else {
+           Id=bundle.getString("id");
+       }
+
+        T_Filtertion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Filtertion detailsHomeProductFragment=new Filtertion();
+                Bundle bundle=new Bundle();
+                detailsHomeProductFragment.setArguments(bundle);
+                getFragmentManager().popBackStack();
+                getFragmentManager().beginTransaction().replace(R.id.Rela_Home,detailsHomeProductFragment).addToBackStack(null).commit();
+
+            }
+        });
     }
     public void Get_products(){
         ReLa_Products.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
-        tripsViewModel.getProduct(UserToken,Id,"en",getContext()).observe(this, new Observer<List<Products_Model>>() {
+        tripsViewModel.getProduct(UserToken,Id,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
                 if(tripsData!=null){
@@ -102,7 +130,24 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
             }
         });
     }
-
+    public void Get_FilterProducts(){
+        ReLa_Products.setAlpha(0.3f);
+        progross.setVisibility(View.VISIBLE);
+        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
+        tripsViewModel.getFilterProduct(UserToken,man,Style_id,Type_id,maxprice,minprice,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
+            @Override
+            public void onChanged(@Nullable List<Products_Model> tripsData) {
+                if(tripsData!=null){
+                    products_Adapter = new Products_Adapter(tripsData,getActivity());
+                    products_Adapter.setOnClicklistner(Products.this);
+                    recyclerProducts.setAdapter(products_Adapter);
+                }
+                progross.setVisibility(View.GONE);
+                ReLa_Products.setAlpha(1f);
+                swipe_Products.setRefreshing(false);
+            }
+        });
+    }
     /**
      * Converting dp to pixel
      */
@@ -114,7 +159,11 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
     @Override
     public void onRefresh() {
         swipe_Products.setRefreshing(false);
-        Get_products();
+        if(getValue){
+            Get_FilterProducts();
+        }else {
+            Get_products();
+        }
     }
 
     public void SwipRefresh(){
@@ -127,7 +176,12 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
         swipe_Products.post(new Runnable() {
             @Override
             public void run() {
+              if(getValue){
+                  Get_FilterProducts();
+              }else {
                   Get_products();
+              }
+
             }
         });
     }
@@ -148,7 +202,7 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
     public void AddToFavourit(String Productid) {
 
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
-        tripsViewModel.AddToFavourit(UserToken,Productid,"en",getContext()).observe(Products.this, new Observer<AddToFavourit>() {
+        tripsViewModel.AddToFavourit(UserToken,Productid,Lang,getContext()).observe(Products.this, new Observer<AddToFavourit>() {
             @Override
             public void onChanged(@Nullable AddToFavourit tripsData) {
                 if(tripsData!=null) {
@@ -157,6 +211,14 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
                 }
             }
         });
+
+    }
+    public void Language(){
+        if(Language.isRTL()){
+            Lang="he";
+        }else {
+            Lang="en";
+        }
 
     }
 }

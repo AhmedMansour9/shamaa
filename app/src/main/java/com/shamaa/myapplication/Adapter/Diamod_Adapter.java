@@ -129,8 +129,6 @@ public class Diamod_Adapter extends RecyclerView.Adapter<Diamod_Adapter.MyViewHo
                     filteredList.get(position).setFavorite("0");
                     holder.Img_Favourit.setBackgroundResource(R.drawable.ic_favourit);
                     detailsProduct_id.AddToFavourit(String.valueOf(filteredList.get(position).getId()));
-                    filteredList.remove(position);
-                    notifyDataSetChanged();
 
                 } else {
                     filteredList.get(position).setFavorite("1");

@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.shamaa.myapplication.Adapter.Favourit_Adapter;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
+import com.shamaa.myapplication.Language;
 import com.shamaa.myapplication.Model.AddToFavourit;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
@@ -64,7 +65,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
     ImageView img_cart;
     @BindView(R.id.nocart)
     TextView nocart;
-
+    String Lang;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         view= inflater.inflate(R.layout.fragment_favourit, container, false);
         ButterKnife.bind(this,view);
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
+        Language();
         init();
 
         SwipRefresh();
@@ -91,7 +93,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         ReLa_Products.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
-        tripsViewModel.getFavourit(UserToken,"en",getContext()).observe(this, new Observer<List<Products_Model>>() {
+        tripsViewModel.getFavourit(UserToken,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
                 progross.setVisibility(View.GONE);
@@ -101,7 +103,6 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
                     products_Adapter = new Favourit_Adapter(tripsData, getActivity());
                     products_Adapter.setOnClicklistner(Favourit.this);
                     recyclerProducts.setAdapter(products_Adapter);
-                    swipe_Products.setRefreshing(false);
                     img_cart.setVisibility(View.GONE);
                     nocart.setVisibility(View.GONE);
 
@@ -156,11 +157,13 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
     @Override
     public void AddToFavourit(String Productid) {
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
-        tripsViewModel.AddToFavourit(UserToken,Productid,"en",getContext()).observe(Favourit.this, new Observer<AddToFavourit>() {
+        tripsViewModel.AddToFavourit(UserToken,Productid,Lang,getContext()).observe(Favourit.this, new Observer<AddToFavourit>() {
             @Override
             public void onChanged(@Nullable AddToFavourit tripsData) {
                 if(tripsData!=null) {
 
+                 Get_products();
+                }else {
 
                 }
             }
@@ -171,6 +174,14 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
     public void onRefresh() {
         swipe_Products.setRefreshing(true);
         Get_products();
+
+    }
+    public void Language(){
+        if(Language.isRTL()){
+            Lang="he";
+        }else {
+            Lang="en";
+        }
 
     }
 }

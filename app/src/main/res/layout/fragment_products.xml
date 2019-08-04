@@ -56,7 +56,7 @@
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:layout_below="@+id/toolbarproduct"
-            android:layout_toStartOf="@+id/T_Edit"
+            android:layout_toStartOf="@+id/T_Filtertion"
             android:src="@drawable/ic_filter"
             android:layout_marginTop="@dimen/_15sdp"/>
         <TextView
@@ -65,7 +65,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/toolbarproduct"
-            android:id="@+id/T_Edit"
+            android:id="@+id/T_Filtertion"
             android:text="@string/filter"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"

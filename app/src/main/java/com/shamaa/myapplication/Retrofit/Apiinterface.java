@@ -6,8 +6,13 @@ import com.shamaa.myapplication.Model.AddToFavourit_Response;
 import com.shamaa.myapplication.Model.Banners_Response;
 import com.shamaa.myapplication.Model.CartResponse;
 import com.shamaa.myapplication.Model.Categories_Response;
+import com.shamaa.myapplication.Model.ClaiberFiltertion_Response;
+import com.shamaa.myapplication.Model.ContactUs_Response;
 import com.shamaa.myapplication.Model.DetailsProduct_Response;
+import com.shamaa.myapplication.Model.EditProfile_Response;
+import com.shamaa.myapplication.Model.Order_Response;
 import com.shamaa.myapplication.Model.Products_Response;
+import com.shamaa.myapplication.Model.Profile_Response;
 import com.shamaa.myapplication.Model.RegisterResponse;
 import com.shamaa.myapplication.Model.SizeByid_Response;
 import com.shamaa.myapplication.Model.Style_Response;
@@ -39,18 +44,46 @@ public interface Apiinterface {
     Call<Products_Response> GetProducts(@QueryMap Map<String, String> queryMab,@Header("Authorization") String auth);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/filter/product")
+    Call<Products_Response> GetFilterProducts(@QueryMap Map<String, String> queryMab,@Header("Authorization") String auth);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/fave/product")
     Call<Products_Response> GetFavourit(@QueryMap Map<String, String> queryMab,@Header("Authorization") String auth);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/best/diamond")
+    Call<Products_Response> GetDiamond(@QueryMap Map<String, String> queryMab,@Header("Authorization") String auth);
+
 
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/add/fave/product")
     Call<AddToFavourit_Response> AddToFavouritProducts(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/contact/us")
+    Call<ContactUs_Response> ContactUs(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/edit/profile")
+    Call<EditProfile_Response> EditProf(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/create/order")
+    Call<Order_Response> CreateOrder(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/products/detalis")
     Call<DetailsProduct_Response> GetDetailsProducts(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/profile")
+    Call<Profile_Response> Profile(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/cart")
@@ -90,6 +123,17 @@ public interface Apiinterface {
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/standard/gold")
     Call<Style_Response> GetStyle(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/style")
+    Call<ClaiberFiltertion_Response> GetClaiber(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/standard/gold")
+    Call<Style_Response> GetType(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/size/product")

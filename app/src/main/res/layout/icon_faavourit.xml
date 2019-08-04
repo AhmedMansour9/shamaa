@@ -7,9 +7,8 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_15sdp"
         android:id="@+id/favourit"
         android:layout_marginTop="@dimen/_5sdp"
         android:src="@drawable/ic_tab_favourit"

@@ -13,6 +13,47 @@
 
         android:id="@+id/ReLative_Products"
         android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_cart_empty"
+            android:id="@+id/img_cart"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_cart"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:id="@+id/nocart"
+            android:textColor="#CFCFCF"
+            android:text="@string/nofavourit"
+            android:gravity="center"
+            android:textSize="@dimen/_15sdp"
+
+            />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/nocart"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:id="@+id/press"-->
+            <!--android:textColor="#7A7A7A"-->
+            <!--android:text="@string/presstoreload"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="@dimen/_12sdp"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:layout_width="@dimen/_15sdp"-->
+            <!--android:layout_height="@dimen/_15sdp"-->
+            <!--android:layout_below="@+id/nocart"-->
+            <!--android:src="@drawable/reload"-->
+            <!--android:layout_toEndOf="@+id/press"-->
+            <!--android:layout_marginTop="@dimen/_10sdp"-->
+            <!--android:layout_marginStart="@dimen/_10sdp"-->
+            <!--/>-->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarproduct"
             android:layout_width="match_parent"
@@ -41,6 +82,12 @@
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/view"
+            android:layout_below="@+id/toolbarproduct"
+            android:background="@drawable/tabs_dropshadow" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,37 +108,19 @@
             android:layout_below="@+id/T_CategoryName"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_Products"
+                android:layout_below="@+id/T_CategoryName"
                 android:scrollbars="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <ImageView
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_cart_empty"
-            android:id="@+id/img_cart"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_cart"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:id="@+id/nocart"
-            android:textColor="#CFCFCF"
-            android:text="@string/nofavourit"
-            android:gravity="center"
-            android:textSize="@dimen/_15sdp"
 
-            />
     </RelativeLayout>
 
     <pl.droidsonroids.gif.GifImageView

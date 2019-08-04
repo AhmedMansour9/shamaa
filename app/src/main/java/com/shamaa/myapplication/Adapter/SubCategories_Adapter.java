@@ -85,7 +85,6 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
     @Override
     public void onBindViewHolder(final SubCategories_Adapter.MyViewHolder holder, final int position) {
 
-
         if(position%2 == 0){
             LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
                     new LinearLayout.LayoutParams(

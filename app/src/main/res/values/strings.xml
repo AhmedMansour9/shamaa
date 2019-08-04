@@ -49,4 +49,26 @@
     <string name="currency">EGP</string>
     <string name="nocart">No Items \n added to cart</string>
     <string name="nofavourit">No Items \n added to favourit</string>
+    <string name="review">People Review this product</string>
+    <string name="presstoreload">Press To Reload</string>
+    <string name="women">For Women</string>
+    <string name="men">For Men</string>
+    <string name="filteeer">Filter</string>
+    <string name="search">Search</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
+    <string name="cotune">Continuue</string>
+    <string name="cash">Cash</string>
+    <string name="debit">Visa</string>
+    <string name="orders">Orders</string>
+    <string name="products">Products</string>
+    <string name="name">Name</string>
+    <string name="message">Message</string>
+    <string name="sendmsg">Send Message</string>
+    <string name="sendsuccess">Message has been Send</string>
+    <string name="failedmsg">Failed, There is something wrong</string>
+    <string name="confirm">ConFirm</string>
+    <string name="updated">Information has been updated Successfully</string>
+    <string name="order">Order has been successfully Created</string>
+
 </resources>

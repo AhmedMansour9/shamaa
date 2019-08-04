@@ -21,13 +21,17 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Cart_Adapter;
 import com.shamaa.myapplication.Adapter.Favourit_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
+import com.shamaa.myapplication.Language;
 import com.shamaa.myapplication.Model.AddToFavourit;
 import com.shamaa.myapplication.Model.CartDetails;
 import com.shamaa.myapplication.Model.Products_Model;
@@ -74,6 +78,9 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
     ImageView  img_cart;
     @BindView(R.id.nocart)
     TextView nocart;
+    @BindView(R.id.Btn_Checkout)
+    Button Btn_Checkout;
+    String Lang;
     UpdateCart_ViewModel updateCart_viewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,13 +89,24 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
         view= inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this,view);
         updateCart_viewModel = ViewModelProviders.of(this).get(UpdateCart_ViewModel.class);
-
+        Language();
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
         init();
 
         SwipRefresh();
 
+        Btn_Checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Check_Order detailsHomeProductFragment=new Check_Order();
+                Bundle bundle=new Bundle();
+                bundle.putString("price",String.valueOf(res));
+                detailsHomeProductFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.Rela_Cart,detailsHomeProductFragment)
+                        .addToBackStack(null).commit();
 
+            }
+        });
 
         return view;
     }
@@ -98,13 +116,14 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
         recyclerProducts.setLayoutManager(gridLayoutManager);
         recyclerProducts.setItemAnimator(new DefaultItemAnimator());
         recyclerProducts.setAdapter(products_Adapter);
+
     }
     public void Get_products(){
         ReLa_Products.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         tripsViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
 
-        tripsViewModel.getCart(UserToken,"en",getContext()).observe(this, new Observer<List<CartDetails>>() {
+        tripsViewModel.getCart(UserToken,Lang,getContext()).observe(this, new Observer<List<CartDetails>>() {
             @Override
             public void onChanged(@Nullable List<CartDetails> tripsData) {
                 progross.setVisibility(View.GONE);
@@ -124,13 +143,19 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
                     recyclerProducts.setAdapter(products_Adapter);
                     swipe_Products.setRefreshing(false);
                     img_cart.setVisibility(View.GONE);
+                    Btn_Checkout.setVisibility(View.VISIBLE);
                     nocart.setVisibility(View.GONE);
                 }else {
-                    recyclerProducts.setVisibility(View.GONE);
                     Total_Price.setVisibility(View.GONE);
+                    Btn_Checkout.setVisibility(View.GONE);
                     title.setVisibility(View.GONE);
                     img_cart.setVisibility(View.VISIBLE);
                     nocart.setVisibility(View.VISIBLE);
+                    recyclerProducts.setVisibility(View.GONE);
+                    TabLayout.Tab tab = TabsLayouts.tabLayout.getTabAt(2); // fourth tab
+                    View tabView = tab.getCustomView();
+                    TextView textView = tabView.findViewById(R.id.cartt);
+                    textView.setVisibility(View.GONE);
                 }
             }
         });
@@ -206,5 +231,13 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
             }
 
         });
+    }
+    public void Language(){
+        if(Language.isRTL()){
+            Lang="he";
+        }else {
+            Lang="en";
+        }
+
     }
 }

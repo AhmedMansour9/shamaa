@@ -22,15 +22,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Banner_Adapter;
 import com.shamaa.myapplication.Adapter.Categories_Adapter;
 import com.shamaa.myapplication.Adapter.Diamod_Adapter;
 import com.shamaa.myapplication.Adapter.Favourit_Adapter;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
+import com.shamaa.myapplication.Language;
 import com.shamaa.myapplication.Model.AddToFavourit;
 import com.shamaa.myapplication.Model.Banners;
+import com.shamaa.myapplication.Model.CartDetails;
 import com.shamaa.myapplication.Model.Categories;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
@@ -38,6 +43,7 @@ import com.shamaa.myapplication.SharedPrefManager;
 import com.shamaa.myapplication.View.DetailsProduct_id;
 import com.shamaa.myapplication.View.SubCategoryid_View;
 import com.shamaa.myapplication.View_Model.Banners_ViewModel;
+import com.shamaa.myapplication.View_Model.Cart_ViewModel;
 import com.shamaa.myapplication.View_Model.Categories_ViewModel;
 import com.shamaa.myapplication.View_Model.Products_ViewModel;
 
@@ -70,9 +76,10 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
     RecyclerView recyclerProducts;
     Diamod_Adapter products_Adapter;
     Products_ViewModel tripsViewModel;
-
+    Cart_ViewModel cartViewModel;
     View view;
     Categories_ViewModel categories_viewModel;
+    String Lang;
     Categories_Adapter categories_adapter;
     Banners_ViewModel banners_viewModel;
     String User_Token;
@@ -104,13 +111,15 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
+        cartViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
+        Language();
         init();
         SwipRefresh();
         return view;
     }
     public void Get_Categories(){
         categories_viewModel = ViewModelProviders.of(this).get(Categories_ViewModel.class);
-        categories_viewModel.getCetgroies(User_Token,"en",getContext()).observe(this, new Observer<List<Categories>>() {
+        categories_viewModel.getCetgroies(User_Token,Lang,getContext()).observe(this, new Observer<List<Categories>>() {
             @Override
             public void onChanged(@Nullable List<Categories> tripsData) {
                 if(tripsData!=null) {
@@ -143,7 +152,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         Scroll_Home.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
-        tripsViewModel.getFavourit(User_Token,"en",getContext()).observe(this, new Observer<List<Products_Model>>() {
+        tripsViewModel.getDiamondss(User_Token,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
                 progross.setVisibility(View.GONE);
@@ -154,6 +163,8 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
                     products_Adapter.setOnClicklistner(Home.this);
                     recyclerProducts.setAdapter(products_Adapter);
 
+                }else {
+
                 }
             }
         });
@@ -162,7 +173,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         Scroll_Home.setAlpha(.3f);
         progross.setVisibility(View.VISIBLE);
         banners_viewModel = ViewModelProviders.of(this).get(Banners_ViewModel.class);
-        banners_viewModel.getBanners(User_Token,"en",getContext()).observe(this, new Observer<List<Banners>>() {
+        banners_viewModel.getBanners(User_Token,Lang,getContext()).observe(this, new Observer<List<Banners>>() {
             @Override
             public void onChanged(@Nullable List<Banners> tripsData) {
                 if (tripsData != null) {
@@ -200,6 +211,22 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         recycler_Categroies.setAdapter(categories_adapter);
         User_Token= SharedPrefManager.getInstance(getContext()).getUserToken();
 
+        cartViewModel.getCart(User_Token,"en",getContext()).observe(getActivity(), new Observer<List<CartDetails>>() {
+            @Override
+            public void onChanged(@Nullable List<CartDetails> tripsData) {
+                TabLayout.Tab tab = TabsLayouts.tabLayout.getTabAt(2); // fourth tab
+                View tabView = tab.getCustomView();
+                TextView textView = tabView.findViewById(R.id.cartt);
+                if(tripsData!=null) {
+                    textView.setVisibility(View.VISIBLE);
+                    textView.setText(String.valueOf(tripsData.size()));
+
+                }else {
+                    textView.setVisibility(View.GONE);
+                }
+
+            }
+        });
     }
 
     @Override
@@ -208,7 +235,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         Bundle bundle=new Bundle();
         bundle.putString("id",id);
         detailsHomeProductFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(R.id.Rela_Home,detailsHomeProductFragment)
+        getFragmentManager().beginTransaction().replace(R.id.Rela_Home,detailsHomeProductFragment)
                 .addToBackStack(null).commit();
 
     }
@@ -241,10 +268,17 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
             public void onChanged(@Nullable AddToFavourit tripsData) {
                 if(tripsData!=null) {
 
-
                 }
             }
         });
+
+    }
+    public void Language(){
+        if(Language.isRTL()){
+            Lang="he";
+        }else {
+            Lang="en";
+        }
 
     }
 }

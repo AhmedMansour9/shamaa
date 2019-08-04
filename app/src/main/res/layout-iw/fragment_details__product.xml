@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff"
+    android:clickable="true"
+    tools:context=".Fragments.Details_Product">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarhome"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logoblack"
+                android:id="@+id/logo"
+                />
+
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbarhome"
+        android:background="#fff"
+        android:id="@+id/Scroll_Details"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/view"
+                android:background="@drawable/tabs_dropshadow" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_Banners"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:id="@+id/recycler_banner2"/>
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:progressBackgroundTint="#FFA448"
+                style="?android:attr/ratingBarStyleSmall"
+                android:isIndicator="true"
+                android:progressTint="#FFA448"
+                android:layout_below="@+id/swipe_Banners"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:stepSize="1.0"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:numStars="5"
+                android:secondaryProgressTint="#FFA448"
+                android:rating="5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ratingBar"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/T_TotalRate"
+                android:textStyle="bold"
+                android:text="Total people"
+                android:textColor="#C7C7C7"
+                android:textSize="@dimen/_10sdp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/swipe_Banners"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:id="@+id/T_Price"
+                android:textStyle="bold"
+                android:text="2000 $"
+                android:textColor="#FF8080"
+                android:textSize="@dimen/_22sdp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/T_Price"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:id="@+id/T_Title"
+                android:textAllCaps="false"
+                android:text="Nameeee"
+                android:textColor="#000"
+                android:textSize="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/T_Title"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/T_Claiber"
+                android:textAllCaps="false"
+                android:text="aaaaaa"
+                android:textColor="#000"
+                android:textSize="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/T_Claiber"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/details"
+                android:textAllCaps="true"
+                android:text="@string/productdetails"
+                android:textColor="#000"
+                android:textSize="@dimen/_10sdp"
+                />
+
+            <View
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="2dp"
+                android:background="#FF8080"
+                android:layout_below="@+id/details"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:id="@+id/view_one"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_one"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/T_Details"
+                android:maxLines="4"
+                android:text="@string/productdetails"
+                android:textColor="#000"
+                android:textSize="@dimen/_10sdp"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_below="@+id/T_Details"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:id="@+id/rel"
+                android:background="@drawable/bcspinner"
+                android:orientation="horizontal">
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/Style_Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:popupBackground="#fff"
+                    android:spinnerMode="dialog"
+                    android:theme="@style/AppTheme"
+                    app:backgroundTint="#707070">
+
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_below="@+id/rel"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:id="@+id/rel2"
+                android:background="@drawable/bcspinner"
+                android:orientation="horizontal">
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/Size_Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:spinnerMode="dialog"
+                    android:theme="@style/AppTheme"
+                    app:backgroundTint="#707070">
+
+
+                </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rel2"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:background="#FF8080"
+                android:text="@string/addtocart"
+                android:textColor="#fff"
+                android:id="@+id/Btn_AddCart"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/progross"
+        android:id="@+id/progross"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        />
+</RelativeLayout>

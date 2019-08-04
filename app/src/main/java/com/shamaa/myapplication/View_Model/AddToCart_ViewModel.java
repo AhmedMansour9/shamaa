@@ -42,7 +42,9 @@ public class AddToCart_ViewModel extends ViewModel {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("lang", lang);
         hashMap.put("product_id", ProductId);
-        hashMap.put("standard_gold_id", standard_gold_id);
+        if(standard_gold_id!=null) {
+            hashMap.put("standard_gold_id", standard_gold_id);
+        }
         if(size_id!=null) {
             hashMap.put("size_id", size_id);
         }

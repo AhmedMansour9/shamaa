@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFDFD"
+    tools:context=".Fragments.Order_Location">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarproduct"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ffffff">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/logoblack"
+                android:id="@+id/logo"
+                />
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/_40sdp"-->
+            <!--android:layout_height="@dimen/_20sdp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/ic_search"-->
+            <!--android:id="@+id/ic_search"-->
+            <!--/>-->
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/view"
+        android:layout_below="@+id/toolbarproduct"
+        android:background="@drawable/tabs_dropshadow" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_centerInParent="true"
+
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:id="@+id/Bc_Relative_Login">
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/bs_spinner_search"
+            android:hint="@string/address"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColorHint="#bcbcbc"
+            android:inputType="textEmailAddress"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:id="@+id/E_Address"
+            android:textColor="#bcbcbc"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/bs_spinner_search"
+            android:hint="@string/city"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_below="@+id/E_Address"
+            android:textColorHint="#bcbcbc"
+            android:inputType="textPassword"
+            android:id="@+id/E_City"
+            android:paddingStart="@dimen/_10sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textColor="#bcbcbc"
+            />
+
+
+        <RadioGroup
+            android:id="@+id/radioSex"
+            android:layout_below="@+id/E_City"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_height="wrap_content" >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radiodebit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/debit"
+                android:buttonTint="#FF8080"
+                android:textColor="#000"
+                 />
+
+            <RadioButton
+                android:id="@+id/radiocash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:textColor="#000"
+                android:checked="true"
+                android:layout_toEndOf="@+id/radiodebit"
+                android:layout_gravity="center_vertical"
+                android:buttonTint="#FF8080"
+                android:text="@string/cash" />
+
+            </RelativeLayout>
+
+        </RadioGroup>
+
+
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_50sdp"
+        android:background="#FF8080"
+        android:text="@string/cotune"
+        android:textColor="#fff"
+        android:textSize="@dimen/_16sdp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:id="@+id/order"
+        />
+
+</RelativeLayout>

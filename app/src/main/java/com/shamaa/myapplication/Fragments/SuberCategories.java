@@ -26,6 +26,7 @@ import com.shamaa.myapplication.Adapter.Categories_Adapter;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
 import com.shamaa.myapplication.Adapter.SubCategories_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
+import com.shamaa.myapplication.Language;
 import com.shamaa.myapplication.Model.Categories;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
@@ -45,7 +46,7 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
     public SuberCategories() {
         // Required empty public constructor
     }
-
+   String Lang;
     @BindView(R.id.recycler_SubCatehories)
     RecyclerView recycler_SubCatehories;
     SubCategories_Adapter subCategories_adapter;
@@ -65,6 +66,7 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         view =inflater.inflate(R.layout.fragment_suber_categories, container, false);
         User_Token= SharedPrefManager.getInstance(getContext()).getUserToken();
         ButterKnife.bind(this,view);
+        Language();
         init();
 
         SwipRefresh();
@@ -76,15 +78,17 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         ReLative_SubCategories.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         categories_viewModel = ViewModelProviders.of(this).get(Categories_ViewModel.class);
-        categories_viewModel.getSubCetgroies(User_Token,"en",getContext(),Id).observe(this, new Observer<List<Categories>>() {
+        categories_viewModel.getSubCetgroies(User_Token,Lang,getContext(),Id).observe(this, new Observer<List<Categories>>() {
             @Override
             public void onChanged(@Nullable List<Categories> tripsData) {
-                subCategories_adapter = new SubCategories_Adapter(tripsData,getActivity());
-                subCategories_adapter.setOnClicklistner(SuberCategories.this);
-                progross.setVisibility(View.GONE);
-                ReLative_SubCategories.setAlpha(1f);
-                recycler_SubCatehories.setAdapter(subCategories_adapter);
-                swipeRefreshLayout.setRefreshing(false);
+                if(tripsData!=null) {
+                    subCategories_adapter = new SubCategories_Adapter(tripsData, getActivity());
+                    subCategories_adapter.setOnClicklistner(SuberCategories.this);
+                    progross.setVisibility(View.GONE);
+                    ReLative_SubCategories.setAlpha(1f);
+                    recycler_SubCatehories.setAdapter(subCategories_adapter);
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         });
     }
@@ -129,9 +133,19 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         Products detailsHomeProductFragment=new Products();
         Bundle bundle=new Bundle();
         bundle.putString("id",id);
+        bundle.putBoolean("BOOLEAN_VALUE",false);
         detailsHomeProductFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(R.id.Rela_Home,detailsHomeProductFragment)
+        getFragmentManager().beginTransaction().replace(R.id.Rela_Home,detailsHomeProductFragment)
                 .addToBackStack(null).commit();
+
+    }
+
+    public void Language(){
+        if(Language.isRTL()){
+            Lang="he";
+        }else {
+            Lang="en";
+        }
 
     }
 }

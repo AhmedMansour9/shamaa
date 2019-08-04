@@ -35,6 +35,13 @@ public class Products_Model implements Serializable
     @SerializedName("caliber")
     @Expose
     private String caliber;
+    @SerializedName("Rate")
+    @Expose
+    private String rate;
+    @SerializedName("total_rate_av")
+    @Expose
+    private String totalRateAv;
+
 
     public String getFavorite() {
         return favorite;
@@ -107,5 +114,19 @@ public class Products_Model implements Serializable
     public void setId(Integer id) {
         this.id = id;
     }
+    public String getRate() {
+        return rate;
+    }
 
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
+    public String getTotalRateAv() {
+        return totalRateAv;
+    }
+
+    public void setTotalRateAv(String totalRateAv) {
+        this.totalRateAv = totalRateAv;
+    }
 }

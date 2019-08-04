@@ -122,8 +122,8 @@ public class Login extends Fragment  {
                         public void onChanged(@Nullable Register_Details tripsData) {
                             progross.setVisibility(View.GONE);
                             Rela_Login.setAlpha(1);
-                            Toast.makeText(getContext(), getResources().getString(R.string.loginsuccess), Toast.LENGTH_SHORT).show();
                             if(tripsData!=null){
+                                Toast.makeText(getContext(), getResources().getString(R.string.loginsuccess), Toast.LENGTH_SHORT).show();
                                 SharedPrefManager.getInstance(getContext()).saveUserToken(tripsData.getToken());
                                 startActivity(new Intent(getContext(), TabsLayouts.class));
                                 getActivity().finish();

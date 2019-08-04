@@ -178,7 +178,6 @@
         android:theme="@style/AppTheme"
         app:backgroundTint="#707070">
 
-
     </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
     </RelativeLayout>
 

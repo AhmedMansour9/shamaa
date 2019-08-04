@@ -21,6 +21,14 @@ public class CartDetails {
     @Expose
     private String totalPrice;
 
+    @SerializedName("photo")
+    @Expose
+    private String photo;
+    @SerializedName("caliber")
+    @Expose
+    private String caliber;
+
+
     public String getId() {
         return id;
     }
@@ -59,5 +67,21 @@ public class CartDetails {
 
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getCaliber() {
+        return caliber;
+    }
+
+    public void setCaliber(String caliber) {
+        this.caliber = caliber;
     }
 }
