@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -204,6 +205,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         recycler_Categroies.setLayoutManager(linearLayoutManager);
         recycler_Categroies.setItemAnimator(new DefaultItemAnimator());
         recycler_Categroies.setLayoutManager(linearLayoutManager);
+        recycler_Categroies.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         recyclerProducts.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerProducts.setAdapter(products_Adapter);
@@ -280,5 +282,21 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
             Lang="en";
         }
 
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = true;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = true;
     }
 }

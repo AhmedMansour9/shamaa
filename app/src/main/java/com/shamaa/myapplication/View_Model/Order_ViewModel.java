@@ -24,15 +24,16 @@ public class Order_ViewModel extends ViewModel {
     private MutableLiveData<Order_Response> regist;
     String Error;
 
-    public LiveData<Order_Response> getCreateOrder(String payment_type, String city, String address, String totalPrice, String User_token, Context context) {
+    public LiveData<Order_Response> getCreateOrder(String payment_type, String city, String address,
+                                                   String totalPrice,String phone, String User_token, Context context) {
         regist = new MutableLiveData<Order_Response>();
         this.context=context;
-        order(payment_type,city,address,totalPrice,User_token);
+        order(payment_type,city,address,totalPrice,phone,User_token);
 
         return regist;
     }
 
-    public void order(String payment_type,String city,String address,String totalPrice,String User_token) {
+    public void order(String payment_type,String city,String address,String totalPrice,String phone,String User_token) {
         Map<String, String> queryMap = new HashMap<>();
 
         queryMap.put("lang", "en");
@@ -40,6 +41,7 @@ public class Order_ViewModel extends ViewModel {
         queryMap.put("city", city);
         queryMap.put("address", address);
         queryMap.put("totalPrice", totalPrice);
+        queryMap.put("phone", phone);
 
         Apiinterface apiInterface = ApiCLint.getClient().create(Apiinterface.class);
         Call<Order_Response> call = apiInterface.CreateOrder(queryMap,"Bearer "+User_token);

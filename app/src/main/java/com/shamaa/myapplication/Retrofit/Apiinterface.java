@@ -10,7 +10,9 @@ import com.shamaa.myapplication.Model.ClaiberFiltertion_Response;
 import com.shamaa.myapplication.Model.ContactUs_Response;
 import com.shamaa.myapplication.Model.DetailsProduct_Response;
 import com.shamaa.myapplication.Model.EditProfile_Response;
+import com.shamaa.myapplication.Model.MyOrders_Response;
 import com.shamaa.myapplication.Model.Order_Response;
+import com.shamaa.myapplication.Model.OrdersDetails_Response;
 import com.shamaa.myapplication.Model.Products_Response;
 import com.shamaa.myapplication.Model.Profile_Response;
 import com.shamaa.myapplication.Model.RegisterResponse;
@@ -84,6 +86,14 @@ public interface Apiinterface {
     @POST("categories/profile")
     Call<Profile_Response> Profile(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
 
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/myorder")
+    Call<MyOrders_Response> Orders(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
+    @Headers({ "Content-Type: application/json;charset=UTF-8"})
+    @POST("categories/order/details")
+    Call<OrdersDetails_Response> OrdersDetails(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
+
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
     @POST("categories/cart")
@@ -121,7 +131,7 @@ public interface Apiinterface {
     Call<Banners_Response> GetBanners(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
 
     @Headers({ "Content-Type: application/json;charset=UTF-8"})
-    @POST("categories/standard/gold")
+    @POST("categories/standard/gold/product")
     Call<Style_Response> GetStyle(@QueryMap Map<String, String> queryMab, @Header("Authorization") String auth);
 
 

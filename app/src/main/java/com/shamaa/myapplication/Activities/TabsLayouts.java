@@ -27,7 +27,7 @@ public class TabsLayouts extends AppCompatActivity {
     public static TabLayout tabLayout;
     private ViewPager viewPager;
     View view,view1,view2,view3,view4;
-
+    public static Boolean Visablty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,4 +126,19 @@ public class TabsLayouts extends AppCompatActivity {
         }
         viewPager.setAdapter(adapter);
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        int index = tabLayout.getSelectedTabPosition();
+//        if(Visablty) {
+//            if (index != 0) {
+//                tabLayout.getTabAt(0).select();
+//            } else {
+//                super.onBackPressed();
+//            }
+//        }else {
+//            super.onBackPressed();
+//        }
+//    }
 }

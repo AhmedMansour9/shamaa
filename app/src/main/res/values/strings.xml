@@ -70,5 +70,7 @@
     <string name="confirm">ConFirm</string>
     <string name="updated">Information has been updated Successfully</string>
     <string name="order">Order has been successfully Created</string>
+    <string name="orderid">Orderid</string>
+    <string name="offer">% OFFER</string>
 
 </resources>

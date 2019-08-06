@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -92,8 +93,8 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
         Language();
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
         init();
-
         SwipRefresh();
+        RefreshData();
 
         Btn_Checkout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +129,7 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
             public void onChanged(@Nullable List<CartDetails> tripsData) {
                 progross.setVisibility(View.GONE);
                 ReLa_Products.setAlpha(1f);
-
+                res=0;
                 if(tripsData!=null) {
                     for (int i = 0; i < tripsData.size(); i++) {
                         total_price = Double.parseDouble(tripsData.get(i).getTotalPrice());
@@ -145,6 +146,12 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
                     img_cart.setVisibility(View.GONE);
                     Btn_Checkout.setVisibility(View.VISIBLE);
                     nocart.setVisibility(View.GONE);
+                    TabLayout.Tab tab = TabsLayouts.tabLayout.getTabAt(2); // fourth tab
+                    View tabView = tab.getCustomView();
+                    TextView textView = tabView.findViewById(R.id.cartt);
+                    textView.setVisibility(View.VISIBLE);
+                    textView.setText(String.valueOf(tripsData.size()));
+
                 }else {
                     Total_Price.setVisibility(View.GONE);
                     Btn_Checkout.setVisibility(View.GONE);
@@ -159,6 +166,15 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
                 }
             }
         });
+    }
+    public void RefreshData(){
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Get_products();
+            }
+        });
+
     }
 
 
@@ -239,5 +255,21 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
             Lang="en";
         }
 
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = true;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = true;
     }
 }

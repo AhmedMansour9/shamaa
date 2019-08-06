@@ -21,11 +21,10 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.shamaa.myapplication.Model.ClaiberFiltertion;
+import com.shamaa.myapplication.Model.OrderDetails;
 import com.shamaa.myapplication.Model.Products_Model;
 import com.shamaa.myapplication.R;
 import com.shamaa.myapplication.View.DetailsProduct_id;
-import com.shamaa.myapplication.View_Model.Filter_Style;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -35,83 +34,71 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ClaiberFiltertion_Adapter extends RecyclerView.Adapter<ClaiberFiltertion_Adapter.MyViewHolder>{
+public class OrderDetails_Adapter extends RecyclerView.Adapter<OrderDetails_Adapter.MyViewHolder> {
 
-    private List<Filter_Style> filteredList=new ArrayList<>();
+    private List<OrderDetails> filteredList = new ArrayList<>();
     View itemView;
     Context con;
     DetailsProduct_id detailsProduct_id;
-    double value,value2;
-    String Styleid;
+    double value, value2;
     String Price;
     //    ListUnitDetails_View listUnitDetails_view;
-    List<Filter_Style> list=new ArrayList<>();
-    int row_index=0;
+    List<OrderDetails> list = new ArrayList<>();
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView T_title,Price,T_Caliber,T_Price,T_OfferPrice,T_Offer;
-        private Button Callnow,Details;
-        private ImageView Image_Unit,Img_Favourit,img_product;
+        private TextView T_title, Price, T_Caliber, T_Price, T_OfferPrice, T_Offer;
+        private Button Callnow, Details;
+        private ImageView Image_Unit, Img_Favourit, img_product;
         private ProgressBar ProgrossSpare;
-        private ImageView person_image,Starone,Startwo,StarThree,StarFour,StarFive;
-        RelativeLayout Rela_Product,relative_row;
+        private ImageView person_image, Starone, Startwo, StarThree, StarFour, StarFive;
+        RelativeLayout Rela_Product;
 
         public MyViewHolder(View view) {
             super(view);
-            T_Caliber=view.findViewById(R.id.T_Caliber);
-            T_Price=view.findViewById(R.id.T_Price);
-            T_OfferPrice=view.findViewById(R.id.T_OfferPrice);
-            img_product=view.findViewById(R.id.img_product);
-            T_title=view.findViewById(R.id.T_title);
-            ProgrossSpare=view.findViewById(R.id.progross);
-            Rela_Product=view.findViewById(R.id.Rela_Product);
-            Img_Favourit=view.findViewById(R.id.Img_Favourit);
-            T_Offer=view.findViewById(R.id.T_Offer);
+            T_Price = view.findViewById(R.id.T_Price);
+            img_product = view.findViewById(R.id.img_product);
+            T_title = view.findViewById(R.id.T_title);
 
         }
     }
 
-    public ClaiberFiltertion_Adapter(List<Filter_Style> list, Context context){
-        this.filteredList=list;
-        this.con=context;
+    public OrderDetails_Adapter(List<OrderDetails> list, Context context) {
+        this.filteredList = list;
+        this.con = context;
     }
-    public ClaiberFiltertion_Adapter(List<Filter_Style> list){
-        this.filteredList=list;
 
+    public OrderDetails_Adapter(List<OrderDetails> list) {
+        this.filteredList = list;
+
+    }
+
+    public void setOnClicklistner(DetailsProduct_id product_id) {
+        this.detailsProduct_id = product_id;
     }
 
 
     @Override
-    public ClaiberFiltertion_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public OrderDetails_Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_style, parent, false);
-        return new ClaiberFiltertion_Adapter.MyViewHolder(itemView);
+                .inflate(R.layout.row_orderdetails, parent, false);
+        return new OrderDetails_Adapter.MyViewHolder(itemView);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void onBindViewHolder(final ClaiberFiltertion_Adapter.MyViewHolder holder, final int position) {
-        holder.T_title.setText(filteredList.get(position).getStyleName());
-        String i = filteredList.get(position).getStyleImage();
+    public void onBindViewHolder(final OrderDetails_Adapter.MyViewHolder holder, final int position) {
+        holder.T_title.setText(filteredList.get(position).getName());
+
+        value2 = Double.parseDouble(filteredList.get(position).getPrice());
+        value2 = Double.parseDouble(new DecimalFormat("##.####").format(value2));
+        holder.T_Price.setText(String.valueOf(value2)+" "+con.getResources().getString(R.string.currency));
+
+
+
+        String i = filteredList.get(position).getPhoto();
         Uri u = Uri.parse(i);
-        if(row_index==position){
-            holder.Rela_Product.setBackground(con.getResources().getDrawable(R.drawable.bc_package));
-            Styleid=filteredList.get(position).getStyleId();
-        }
-        else
-        {
-            holder.Rela_Product.setBackgroundColor(con.getResources().getColor(R.color.white));
-        }
-
-       holder.Rela_Product.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               row_index=position;
-               notifyDataSetChanged();
-
-           }
-       });
         Glide.with(con)
-                .load("http://emarketingbakers.com/shama/public/uploads/topics/"+ u)
+                .load("http://emarketingbakers.com/shama/public/uploads/topics/" + u)
                 .apply(new RequestOptions().override(500, 500))
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -119,6 +106,7 @@ public class ClaiberFiltertion_Adapter extends RecyclerView.Adapter<ClaiberFilte
 //                            holder.ProgrossSpare.setVisibility(View.GONE);
                         return false;
                     }
+
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
 //                            holder.ProgrossSpare.setVisibility(View.GONE);
@@ -134,6 +122,7 @@ public class ClaiberFiltertion_Adapter extends RecyclerView.Adapter<ClaiberFilte
     public int getItemCount() {
         return filteredList.size();
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -144,11 +133,5 @@ public class ClaiberFiltertion_Adapter extends RecyclerView.Adapter<ClaiberFilte
         return position;
     }
 
-    public String getStyleId(){
-
-
-        return Styleid;
-    };
 
 }
-

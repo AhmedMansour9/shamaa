@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -146,6 +147,21 @@ public class Edit_Profile extends Fragment {
     }
     private static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = false;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = false;
     }
 
     }

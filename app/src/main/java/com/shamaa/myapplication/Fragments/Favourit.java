@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Favourit_Adapter;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
@@ -77,7 +79,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         init();
 
         SwipRefresh();
-
+        RefreshData();
         return view;
     }
 
@@ -115,7 +117,15 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
             }
         });
     }
+    public void RefreshData(){
 
+        img_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Get_products();
+            }
+        });
+    }
     /**
      * Converting dp to pixel
      */
@@ -183,6 +193,22 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
             Lang="en";
         }
 
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = true;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = true;
     }
 }
 

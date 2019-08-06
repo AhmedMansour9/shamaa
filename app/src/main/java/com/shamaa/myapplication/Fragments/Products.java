@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
 import com.shamaa.myapplication.Language;
@@ -72,6 +74,7 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
         view= inflater.inflate(R.layout.fragment_products, container, false);
         ButterKnife.bind(this,view);
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
+        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
         Language();
         init();
 
@@ -115,7 +118,7 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
     public void Get_products(){
         ReLa_Products.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
-        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
+
         tripsViewModel.getProduct(UserToken,Id,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
@@ -193,7 +196,7 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
         Bundle bundle=new Bundle();
         bundle.putSerializable("details",products_model);
         detailsHomeProductFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(R.id.Rela_Home,detailsHomeProductFragment)
+        getFragmentManager().beginTransaction().replace(R.id.Rela_Home,detailsHomeProductFragment)
                 .addToBackStack(null).commit();
 
     }
@@ -220,5 +223,21 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
             Lang="en";
         }
 
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = false;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = false;
     }
 }

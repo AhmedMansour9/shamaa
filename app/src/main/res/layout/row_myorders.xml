@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:background="@drawable/bc_profile"
+    android:layout_margin="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ahmeed"
+        android:textColor="#828282"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:id="@+id/T_Date"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/T_Date"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#FF8080"
+        android:text="1000 $"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:id="@+id/T_Price"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Orderid 2323"
+        android:textColor="#FF8080"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:id="@+id/T_Orderid"
+        android:layout_alignParentEnd="true"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:textColor="#fff"
+        android:padding="@dimen/_3sdp"
+        android:background="#A8D933"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:id="@+id/T_Statues"
+        android:layout_below="@+id/T_Orderid"
+        android:layout_alignParentEnd="true"
+
+        />
+</RelativeLayout>

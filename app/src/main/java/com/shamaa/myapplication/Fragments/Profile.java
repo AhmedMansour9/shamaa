@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shamaa.myapplication.Activities.MainActivity;
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.SubCategories_Adapter;
 import com.shamaa.myapplication.Model.Categories;
 import com.shamaa.myapplication.Model.Profile_Details;
@@ -66,6 +68,8 @@ public class Profile extends Fragment {
     TextView T_Edit;
     @BindView(R.id.Rela_Contactus)
     RelativeLayout Rela_Contactus;
+    @BindView(R.id.Rela_MyOrders)
+    RelativeLayout Rela_MyOrders;
     Profile_ViewModel profile_viewModel;
     View view;
     String User_Token;
@@ -78,17 +82,24 @@ public class Profile extends Fragment {
         User_Token=SharedPrefManager.getInstance(getContext()).getUserToken();
          ChangeFont();
          Get_Profle();
+        Rela_MyOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new MyOrders_Fragment()).addToBackStack(null).commit();
+
+            }
+        });
         T_Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Edit_Profile()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Edit_Profile()).addToBackStack(null).commit();
 
             }
         });
         Rela_Contactus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Contact_Us()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Contact_Us()).addToBackStack(null).commit();
 
             }
         });
@@ -143,5 +154,21 @@ public class Profile extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = true;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = true;
     }
 }

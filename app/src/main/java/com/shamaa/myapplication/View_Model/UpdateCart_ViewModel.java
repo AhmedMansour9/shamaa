@@ -47,7 +47,7 @@ public class UpdateCart_ViewModel extends ViewModel {
     public void pluscart( String id,String lang,String User_token) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("lang", lang);
-        hashMap.put("product_id", id);
+        hashMap.put("cart_id", id);
         Apiinterface service = ApiCLint.getClient().create(Apiinterface.class);
         Call<UpdateCart_Response> call = service.UpdateCart(hashMap,"Bearer "+User_token);
         call.enqueue(new Callback<UpdateCart_Response>() {
@@ -70,7 +70,7 @@ public class UpdateCart_ViewModel extends ViewModel {
     public void miuscart( String id,String lang,String User_token) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("lang", lang);
-        hashMap.put("product_id", id);
+        hashMap.put("cart_id", id);
         Apiinterface service = ApiCLint.getClient().create(Apiinterface.class);
         Call<UpdateCart_Response> call = service.MinusCart(hashMap,"Bearer "+User_token);
         call.enqueue(new Callback<UpdateCart_Response>() {
@@ -93,7 +93,7 @@ public class UpdateCart_ViewModel extends ViewModel {
     public void deletecart( String id,String lang,String User_token) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("lang", lang);
-        hashMap.put("product_id", id);
+        hashMap.put("cart_id", id);
         Apiinterface service = ApiCLint.getClient().create(Apiinterface.class);
         Call<UpdateCart_Response> call = service.DeleteCart(hashMap,"Bearer "+User_token);
         call.enqueue(new Callback<UpdateCart_Response>() {

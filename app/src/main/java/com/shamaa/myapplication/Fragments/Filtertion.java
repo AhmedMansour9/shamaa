@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Categories_Adapter;
 import com.shamaa.myapplication.Adapter.ClaiberFiltertion_Adapter;
 import com.shamaa.myapplication.Language;
@@ -38,6 +40,7 @@ import com.shamaa.myapplication.Model.Style_Details;
 import com.shamaa.myapplication.R;
 import com.shamaa.myapplication.SharedPrefManager;
 import com.shamaa.myapplication.View_Model.Categories_ViewModel;
+import com.shamaa.myapplication.View_Model.Filter_Style;
 import com.shamaa.myapplication.View_Model.StylesFiltertion_ViewModel;
 import com.shamaa.myapplication.View_Model.Stylestbyid_ViewModel;
 
@@ -76,15 +79,16 @@ public class Filtertion extends Fragment {
     ArrayAdapter<Style_Details> listStylest;
     ClaiberFiltertion_Adapter claiberFiltertion_adapter;
     TextView tvMin,tvMax;
-    List<ClaiberFiltertion> claiberate;
+    List<Filter_Style> claiberate;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_filtertion, container, false);
         ButterKnife.bind(this,view);
-        claiberFiltertion_adapter = new ClaiberFiltertion_Adapter(claiberate, getActivity());
         claiberate=new ArrayList<>();
+        claiberFiltertion_adapter = new ClaiberFiltertion_Adapter(claiberate, getActivity());
+
         Language();
           init();
          initPrices();
@@ -124,9 +128,14 @@ public class Filtertion extends Fragment {
             @Override
             public void onChanged(@Nullable List<ClaiberFiltertion> tripsData) {
                 if(tripsData!=null) {
-                    claiberate=tripsData;
+                    for(int i=0;i<tripsData.size();i++){
+                        Filter_Style filter_style=new Filter_Style();
+                        filter_style.setStyleId(tripsData.get(i).getStyleId());
+                        filter_style.setStyleImage(tripsData.get(i).getStyleImage());
+                        filter_style.setStyleName(tripsData.get(i).getStyleName());
+                        claiberate.add(filter_style);
+                    }
                     claiberFiltertion_adapter.notifyDataSetChanged();
-                    recycler_Stylest.setAdapter(claiberFiltertion_adapter);
                 }
             }
         });
@@ -135,9 +144,10 @@ public class Filtertion extends Fragment {
     public void init(){
         GridLayoutManager linearLayoutManager = new GridLayoutManager(getActivity(),2);
 //        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recycler_Stylest.setLayoutManager(linearLayoutManager);
         recycler_Stylest.setItemAnimator(new DefaultItemAnimator());
         recycler_Stylest.setLayoutManager(linearLayoutManager);
+
+        recycler_Stylest.setAdapter(claiberFiltertion_adapter);
 
 
     }
@@ -279,5 +289,21 @@ public class Filtertion extends Fragment {
             Lang="en";
         }
 
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = false;
+        } else {
+
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = false;
     }
 }

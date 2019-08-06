@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFDFD">
+    android:background="#FAFAFA">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarproduct"
         android:layout_width="match_parent"
@@ -43,6 +43,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:layout_below="@+id/toolbarproduct"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,7 +51,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbarproduct"
         android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/Rela_Login"
         android:layout_height="match_parent">
@@ -94,8 +94,25 @@
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_below="@+id/E_Address"
             android:textColorHint="#bcbcbc"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:id="@+id/E_City"
+            android:paddingStart="@dimen/_10sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:textColor="#bcbcbc"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/bs_spinner_search"
+            android:hint="@string/phone"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_below="@+id/E_City"
+            android:textColorHint="#bcbcbc"
+            android:inputType="number"
+            android:id="@+id/E_Phone"
             android:paddingStart="@dimen/_10sdp"
             android:drawablePadding="@dimen/_10sdp"
             android:textColor="#bcbcbc"
@@ -145,7 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Bc_Relative_Login"
-        android:layout_marginTop="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_150sdp"
         android:layout_marginEnd="@dimen/_30sdp"
         android:layout_alignParentEnd="true"
         android:id="@+id/Total_Price"
@@ -156,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Bc_Relative_Login"
-        android:layout_marginTop="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_150sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:text="@string/subtotal"
         android:textSize="@dimen/_13sdp"

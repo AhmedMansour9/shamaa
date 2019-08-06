@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
@@ -24,36 +25,33 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.shamaa.myapplication.Activities.TabsLayouts;
-import com.shamaa.myapplication.Adapter.Categories_Adapter;
-import com.shamaa.myapplication.Adapter.Products_Adapter;
-import com.shamaa.myapplication.Adapter.SubCategories_Adapter;
+import com.shamaa.myapplication.Adapter.MyOrders_Adapter;
+import com.shamaa.myapplication.Adapter.OrderDetails_Adapter;
 import com.shamaa.myapplication.GridSpacingItemDecoration;
 import com.shamaa.myapplication.Language;
-import com.shamaa.myapplication.Model.Categories;
-import com.shamaa.myapplication.Model.Products_Model;
+import com.shamaa.myapplication.Model.MyOrders;
 import com.shamaa.myapplication.R;
 import com.shamaa.myapplication.SharedPrefManager;
-import com.shamaa.myapplication.View.SubCategoryid_View;
-import com.shamaa.myapplication.View_Model.Categories_ViewModel;
-import com.shamaa.myapplication.View_Model.Products_ViewModel;
+import com.shamaa.myapplication.View_Model.Orders_ViewModel;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuberCategories extends Fragment implements SubCategoryid_View,SwipeRefreshLayout.OnRefreshListener{
+public class OrderDetails extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
 
-    public SuberCategories() {
+    public OrderDetails() {
         // Required empty public constructor
     }
-   String Lang;
+
+    String Lang;
     @BindView(R.id.recycler_SubCatehories)
     RecyclerView recycler_SubCatehories;
-    SubCategories_Adapter subCategories_adapter;
+    OrderDetails_Adapter myOrders_adapter;
     View view;
-    Categories_ViewModel categories_viewModel;
+    Orders_ViewModel orders_viewModel;
     @BindView(R.id.ReLative_SubCategories)
     RelativeLayout ReLative_SubCategories;
     @BindView(R.id.progrossSubCategory)
@@ -61,11 +59,12 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
     @BindView(R.id.swipe_SubCategories)
     SwipeRefreshLayout swipeRefreshLayout;
     String User_Token,Id;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =inflater.inflate(R.layout.fragment_suber_categories, container, false);
+        view= inflater.inflate(R.layout.fragment_order_details, container, false);
         User_Token= SharedPrefManager.getInstance(getContext()).getUserToken();
         ButterKnife.bind(this,view);
         Language();
@@ -74,36 +73,40 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         SwipRefresh();
 
 
+
+
         return view;
     }
-    public void Get_SubCategories(){
+    public void Get_Orders(){
         ReLative_SubCategories.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
-
-        categories_viewModel.getSubCetgroies(User_Token,Lang,getContext(),Id).observe(this, new Observer<List<Categories>>() {
+        orders_viewModel = ViewModelProviders.of(this).get(Orders_ViewModel.class);
+        orders_viewModel.getDetailsOrders(Id,User_Token,Lang,getContext()).observe(this, new Observer<List<com.shamaa.myapplication.Model.OrderDetails>>() {
             @Override
-            public void onChanged(@Nullable List<Categories> tripsData) {
+            public void onChanged(@Nullable List<com.shamaa.myapplication.Model.OrderDetails> tripsData) {
                 progross.setVisibility(View.GONE);
                 ReLative_SubCategories.setAlpha(1f);
-                swipeRefreshLayout.setRefreshing(false);
-                if(tripsData!=null) {
-                    subCategories_adapter = new SubCategories_Adapter(tripsData, getActivity());
-                    subCategories_adapter.setOnClicklistner(SuberCategories.this);
-                    recycler_SubCatehories.setAdapter(subCategories_adapter);
 
+                if(tripsData!=null) {
+                    myOrders_adapter = new OrderDetails_Adapter(tripsData, getActivity());
+//                    subCategories_adapter.setOnClicklistner(SuberCategories.this);
+                    progross.setVisibility(View.GONE);
+                    ReLative_SubCategories.setAlpha(1f);
+                    recycler_SubCatehories.setAdapter(myOrders_adapter);
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             }
         });
     }
     public void init(){
-        categories_viewModel = ViewModelProviders.of(this).get(Categories_ViewModel.class);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recycler_SubCatehories.setLayoutManager(gridLayoutManager);
         recycler_SubCatehories.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recycler_SubCatehories.setItemAnimator(new DefaultItemAnimator());
-        Bundle b=getArguments();
-        Id=b.getString("id");
-
+        Bundle bundle=getArguments();
+        if(bundle!=null){
+            Id=bundle.getString("id");
+        }
     }
     private int dpToPx(int dp) {
         Resources r = getResources();
@@ -113,7 +116,7 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(false);
-        Get_SubCategories();
+        Get_Orders();
 
     }
 
@@ -127,21 +130,22 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                Get_SubCategories();
+                Get_Orders();
             }
         });
     }
 
-    @Override
-    public void id(String id) {
-        Products detailsHomeProductFragment=new Products();
-        Bundle bundle=new Bundle();
-        bundle.putString("id",id);
-        bundle.putBoolean("BOOLEAN_VALUE",false);
-        detailsHomeProductFragment.setArguments(bundle);
-        getFragmentManager().beginTransaction().add(R.id.Rela_Home,detailsHomeProductFragment).addToBackStack(null).commit();
-
-    }
+//    @Override
+//    public void id(String id) {
+//        Products detailsHomeProductFragment=new Products();
+//        Bundle bundle=new Bundle();
+//        bundle.putString("id",id);
+//        bundle.putBoolean("BOOLEAN_VALUE",false);
+//        detailsHomeProductFragment.setArguments(bundle);
+//        getFragmentManager().beginTransaction().replace(R.id.Rela_Home,detailsHomeProductFragment)
+//                .addToBackStack(null).commit();
+//
+//    }
 
     public void Language(){
         if(Language.isRTL()){
@@ -149,6 +153,7 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         }else {
             Lang="en";
         }
+
     }
     @Override
     public void setMenuVisibility(final boolean visible) {
@@ -166,3 +171,4 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         TabsLayouts.Visablty = false;
     }
 }
+

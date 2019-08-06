@@ -110,6 +110,7 @@
                     android:id="@+id/recycler_Categroies"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
+                    android:overScrollMode="never"
                     android:layout_below="@+id/T_Category"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"

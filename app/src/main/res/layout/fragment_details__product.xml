@@ -165,7 +165,7 @@
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_below="@+id/T_Details"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:id="@+id/rel"
         android:background="@drawable/bcspinner"
         android:orientation="horizontal">

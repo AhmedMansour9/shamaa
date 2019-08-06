@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -49,8 +50,8 @@ public class Check_Order extends Fragment {
     EditText E_Address;
     @BindView(R.id.E_City)
     EditText E_City;
-//    @BindView(R.id.radioSex)
-//    RadioGroup radioGroup;
+    @BindView(R.id.E_Phone)
+    EditText E_Phone;
     Order_ViewModel order_viewModel;
     String payment;
     View view;
@@ -83,13 +84,15 @@ public class Check_Order extends Fragment {
                     public void onClick(View view) {
                         FUtilsValidation.isEmpty(E_Address, "");
                         FUtilsValidation.isEmpty(E_City, "");
+                        FUtilsValidation.isEmpty(E_Phone, "");
 //                        if(radioGroup.getCheckedRadioButtonId()!=-1){
 //                            int id= radioGroup.getCheckedRadioButtonId();
 //                            View radioButton = radioGroup.findViewById(id);
 //                            int radioId = radioGroup.indexOfChild(radioButton);
 //                            RadioButton btn = (RadioButton) radioGroup.getChildAt(radioId);
 //                            String selection = (String) btn.getText();
-                            if(!E_Address.getText().toString().equals("")&&!E_City.getText().toString().equals("")) {
+                            if(!E_Address.getText().toString().equals("")&&!E_City.getText().toString().equals("")
+                                    &&!E_Phone.getText().toString().equals("")) {
 //                                if(selection.equals("Visa")||selection.equals("بطاقة الخصم / الائتمان")){
 //                                  Intent intent=new Intent(getActivity(),PayMent.class);
 //                                  intent.putExtra("price",Price);
@@ -106,12 +109,12 @@ public class Check_Order extends Fragment {
                                 progross.setVisibility(View.VISIBLE);
 
                                 order_viewModel.getCreateOrder(payment,E_City.getText().toString()
-                                            ,E_Address.getText().toString()  ,Price,User_token ,getContext()).observe(Check_Order.this, new Observer<Order_Response>() {
+                                            ,E_Address.getText().toString()  ,Price,E_Phone.getText().toString(),User_token ,getContext()).observe(Check_Order.this, new Observer<Order_Response>() {
                                         @Override
                                         public void onChanged(@Nullable Order_Response tripsData) {
-//                                            progross.setVisibility(View.GONE);
+                                            progross.setVisibility(View.GONE);
                                             orderBtn.setEnabled(true);
-//                                            Rela_Login.setAlpha(1);
+                                            Rela_Login.setAlpha(1);
                                             if(tripsData!=null){
 
                                                 Toast.makeText(getContext(), getResources().getString(R.string.order), Toast.LENGTH_SHORT).show();
@@ -144,5 +147,19 @@ public class Check_Order extends Fragment {
 
         return view;
     }
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = false;
+        } else {
 
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = false;
+    }
 }

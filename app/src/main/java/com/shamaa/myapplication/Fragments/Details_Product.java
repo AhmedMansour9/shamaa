@@ -1,6 +1,7 @@
 package com.shamaa.myapplication.Fragments;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -130,6 +131,7 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_details__product, container, false);
+        detailsProduct_viewModel = ViewModelProviders.of(this).get(DetailsProduct_ViewModel.class);
         ButterKnife.bind(this,view);
         tripsViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
         Language();
@@ -264,7 +266,7 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
 
     }
     public void GetBanners(){
-        detailsProduct_viewModel = ViewModelProviders.of(this).get(DetailsProduct_ViewModel.class);
+
         detailsProduct_viewModel.getDetailsProduct(User_Token,Product_id,Lang,getContext()).observe(this, new Observer<List<DetailsProduct>>() {
             @Override
             public void onChanged(@Nullable List<DetailsProduct> tripsData) {
@@ -352,7 +354,21 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
         }else {
             Lang="en";
         }
+    }
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            TabsLayouts.Visablty = false;
+        } else {
 
+        }
+
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        TabsLayouts.Visablty = false;
     }
 }
 

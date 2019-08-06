@@ -17,7 +17,7 @@ public class CartDetails {
     @SerializedName("price")
     @Expose
     private String price;
-    @SerializedName("totalPrice")
+    @SerializedName("totalprice")
     @Expose
     private String totalPrice;
 

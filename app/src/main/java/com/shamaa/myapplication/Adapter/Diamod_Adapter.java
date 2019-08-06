@@ -111,7 +111,7 @@ public class Diamod_Adapter extends RecyclerView.Adapter<Diamod_Adapter.MyViewHo
 
         if (!filteredList.get(position).getOffer().equals("0")) {
             holder.T_Offer.setVisibility(View.VISIBLE);
-            holder.T_Offer.setText(filteredList.get(position).getOffer());
+            holder.T_Offer.setText(filteredList.get(position).getOffer()+" "+con.getResources().getString(R.string.offer));
         } else {
             holder.T_Offer.setVisibility(View.GONE);
         }
