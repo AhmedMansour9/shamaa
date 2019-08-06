@@ -37,6 +37,7 @@ import com.shamaa.myapplication.Adapter.Banner_Adapter;
 import com.shamaa.myapplication.Adapter.BannersProduct_Adapter;
 import com.shamaa.myapplication.Adapter.Cart_Adapter;
 import com.shamaa.myapplication.Adapter.SubCategories_Adapter;
+import com.shamaa.myapplication.CustomSearchableSpinner;
 import com.shamaa.myapplication.Language;
 import com.shamaa.myapplication.Model.AddToCart_Response;
 import com.shamaa.myapplication.Model.CartDetails;
@@ -243,6 +244,7 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             Style = Style_Spinner.getSelectedItem().toString();
 
+
                             for (i = 0; i < tripsData.size(); i++) {
                                 if (tripsData.get(i).getName().equals(Style)) {
                                     Style_id = String.valueOf(tripsData.get(i).getId());
@@ -369,6 +371,11 @@ public class Details_Product extends Fragment implements SwipeRefreshLayout.OnRe
     public void onAttach(Context context) {
         super.onAttach(context);
         TabsLayouts.Visablty = false;
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        TabsLayouts.Visablty = true;
     }
 }
 

@@ -72,5 +72,8 @@
     <string name="order">Order has been successfully Created</string>
     <string name="orderid">Orderid</string>
     <string name="offer">% OFFER</string>
+    <string name="english">English</string>
+    <string name="herbian">Hebrew</string>
+    <string name="language">Language</string>
 
 </resources>

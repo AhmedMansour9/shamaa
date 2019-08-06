@@ -77,7 +77,6 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
         Language();
         init();
-
         SwipRefresh();
         RefreshData();
         return view;
@@ -92,6 +91,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
 
     }
     public void Get_products(){
+        swipe_Products.setRefreshing(true);
         ReLa_Products.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
         tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
@@ -137,9 +137,9 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
 
 
     public void SwipRefresh(){
-        swipe_Products.setOnRefreshListener(this);
         swipe_Products.setEnabled(true);
-        swipe_Products.setRefreshing(true);
+        swipe_Products.setOnRefreshListener(this);
+       swipe_Products.setRefreshing(true);
         swipe_Products.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -182,7 +182,6 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
 
     @Override
     public void onRefresh() {
-        swipe_Products.setRefreshing(true);
         Get_products();
 
     }
@@ -210,5 +209,11 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         super.onAttach(context);
         TabsLayouts.Visablty = true;
     }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        TabsLayouts.Visablty = true;
+    }
+
 }
 

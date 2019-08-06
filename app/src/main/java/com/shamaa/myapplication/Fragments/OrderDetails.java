@@ -170,5 +170,7 @@ public class OrderDetails extends Fragment implements SwipeRefreshLayout.OnRefre
         super.onAttach(context);
         TabsLayouts.Visablty = false;
     }
+
+
 }
 

@@ -70,6 +70,8 @@ public class Profile extends Fragment {
     RelativeLayout Rela_Contactus;
     @BindView(R.id.Rela_MyOrders)
     RelativeLayout Rela_MyOrders;
+    @BindView(R.id.Rela_Setting)
+    RelativeLayout Rela_Setting;
     Profile_ViewModel profile_viewModel;
     View view;
     String User_Token;
@@ -93,6 +95,13 @@ public class Profile extends Fragment {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Edit_Profile()).addToBackStack(null).commit();
+
+            }
+        });
+        Rela_Setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.ReLa_Profile, new Language()).addToBackStack(null).commit();
 
             }
         });
@@ -132,10 +141,6 @@ public class Profile extends Fragment {
 
     }
 
-    public void getInformation(){
-
-
-    }
 
     public void Get_Profle(){
         profile_viewModel = ViewModelProviders.of(this).get(Profile_ViewModel.class);

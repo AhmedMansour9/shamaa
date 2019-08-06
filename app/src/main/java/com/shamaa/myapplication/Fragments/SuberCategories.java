@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Categories_Adapter;
@@ -60,7 +61,9 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
     GifImageView progross;
     @BindView(R.id.swipe_SubCategories)
     SwipeRefreshLayout swipeRefreshLayout;
-    String User_Token,Id;
+    @BindView(R.id.T_CategoryName)
+    TextView T_CategoryName;
+    String User_Token,Id,Name;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,7 +106,8 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
         recycler_SubCatehories.setItemAnimator(new DefaultItemAnimator());
         Bundle b=getArguments();
         Id=b.getString("id");
-
+        Name=b.getString("name");
+        T_CategoryName.setText(Name);
     }
     private int dpToPx(int dp) {
         Resources r = getResources();
@@ -133,10 +137,11 @@ public class SuberCategories extends Fragment implements SubCategoryid_View,Swip
     }
 
     @Override
-    public void id(String id) {
+    public void id(String id,String name) {
         Products detailsHomeProductFragment=new Products();
         Bundle bundle=new Bundle();
         bundle.putString("id",id);
+        bundle.putString("name",name);
         bundle.putBoolean("BOOLEAN_VALUE",false);
         detailsHomeProductFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().add(R.id.Rela_Home,detailsHomeProductFragment).addToBackStack(null).commit();

@@ -39,21 +39,29 @@
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_Banners"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/toolbarhome"
+        android:layout_height="match_parent">
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbarhome"
         android:background="#ffffff"
         android:id="@+id/Scroll_Home"
         android:layout_height="match_parent">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:id="@+id/view"
                 android:background="@drawable/tabs_dropshadow" />
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -66,11 +74,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                        android:id="@+id/swipe_Banners"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_marginBottom="@dimen/_5sdp"
@@ -79,7 +83,6 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
                 <!--<me.relex.circleindicator.CircleIndicator-->
                     <!--android:id="@+id/view_pager_circle_indicator"-->
@@ -162,14 +165,11 @@
 
 
 
+
+
             </RelativeLayout>
-
-
-
-
-
-
     </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <pl.droidsonroids.gif.GifImageView

@@ -171,16 +171,18 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         });
     }
     public void Get_Banners(){
+
         Scroll_Home.setAlpha(.3f);
         progross.setVisibility(View.VISIBLE);
         banners_viewModel = ViewModelProviders.of(this).get(Banners_ViewModel.class);
         banners_viewModel.getBanners(User_Token,Lang,getContext()).observe(this, new Observer<List<Banners>>() {
             @Override
             public void onChanged(@Nullable List<Banners> tripsData) {
+                swipe_Banners.setRefreshing(false);
+                Scroll_Home.setAlpha(1);
+                progross.setVisibility(View.GONE);
                 if (tripsData != null) {
                     listBanners = tripsData;
-                    Scroll_Home.setAlpha(1);
-                    progross.setVisibility(View.GONE);
                     banner_adapter = new Banner_Adapter(tripsData, getActivity());
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -232,10 +234,11 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
     }
 
     @Override
-    public void id(String id) {
+    public void id(String id,String Name) {
         SuberCategories detailsHomeProductFragment=new SuberCategories();
         Bundle bundle=new Bundle();
         bundle.putString("id",id);
+        bundle.putString("name",Name);
         detailsHomeProductFragment.setArguments(bundle);
         getFragmentManager().beginTransaction().replace(R.id.Rela_Home,detailsHomeProductFragment)
                 .addToBackStack(null).commit();
@@ -244,7 +247,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
 
     @Override
     public void onRefresh() {
-        swipe_Banners.setRefreshing(false);
+
         Get_Categories();
         Get_Banners();
         Get_products();

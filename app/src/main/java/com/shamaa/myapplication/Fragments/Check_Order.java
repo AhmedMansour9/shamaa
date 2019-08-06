@@ -97,13 +97,11 @@ public class Check_Order extends Fragment {
 //                                  Intent intent=new Intent(getActivity(),PayMent.class);
 //                                  intent.putExtra("price",Price);
 //                                  startActivity(intent);
-
-
 //                                }
 //                                else if(selection.equals("Cash")||selection.equals("نقدي")){
                                     payment="cash";
 //                                  progross_order.setVisibility(View.VISIBLE);
-                                    hideSoftKeyboard(getContext(),view);
+
                                 Rela_Login.setAlpha(0.3f);
                                 orderBtn.setEnabled(false);
                                 progross.setVisibility(View.VISIBLE);
@@ -112,6 +110,7 @@ public class Check_Order extends Fragment {
                                             ,E_Address.getText().toString()  ,Price,E_Phone.getText().toString(),User_token ,getContext()).observe(Check_Order.this, new Observer<Order_Response>() {
                                         @Override
                                         public void onChanged(@Nullable Order_Response tripsData) {
+
                                             progross.setVisibility(View.GONE);
                                             orderBtn.setEnabled(true);
                                             Rela_Login.setAlpha(1);
@@ -161,5 +160,10 @@ public class Check_Order extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         TabsLayouts.Visablty = false;
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        TabsLayouts.Visablty = true;
     }
 }

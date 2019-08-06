@@ -50,9 +50,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:layout_below="@+id/toolbarproduct"
-            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:layout_height="match_parent">
 
 
@@ -123,7 +123,7 @@
                 android:background="@drawable/bc_images"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_height="@dimen/_80sdp">
 
                 <ImageView
@@ -152,7 +152,7 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:background="@drawable/bc_images_selected"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:visibility="invisible"
                 android:layout_height="@dimen/_80sdp">
 
@@ -201,7 +201,7 @@
         android:id="@+id/rel"
         android:background="@drawable/bcspinner"
         android:orientation="horizontal">
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        <com.shamaa.myapplication.CustomSearchableSpinner
             android:id="@+id/Style_Spinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
@@ -210,7 +210,7 @@
             android:theme="@style/AppTheme"
             app:backgroundTint="#707070">
 
-        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+        </com.shamaa.myapplication.CustomSearchableSpinner>
     </RelativeLayout>
 
     <com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar
@@ -254,7 +254,7 @@
         android:layout_marginEnd="@dimen/_30sdp"
         android:textSize="16dp"
         android:textColor="#000"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:layout_width="@dimen/_150sdp"

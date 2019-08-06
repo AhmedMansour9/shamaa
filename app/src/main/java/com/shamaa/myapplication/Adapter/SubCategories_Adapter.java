@@ -128,7 +128,7 @@ public class SubCategories_Adapter extends RecyclerView.Adapter<SubCategories_Ad
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                subCategoryid_view.id(filteredList.get(position).getId());
+                subCategoryid_view.id(filteredList.get(position).getId(),filteredList.get(position).getName());
             }
         });
 

@@ -313,7 +313,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:id="@+id/T_Setting"
-            android:text="@string/setting"
+            android:text="@string/language"
             android:layout_centerVertical="true"
             android:maxLines="1"
             android:textStyle="bold"

@@ -163,5 +163,10 @@ public class Edit_Profile extends Fragment {
         super.onAttach(context);
         TabsLayouts.Visablty = false;
     }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        TabsLayouts.Visablty = true;
+    }
 
     }

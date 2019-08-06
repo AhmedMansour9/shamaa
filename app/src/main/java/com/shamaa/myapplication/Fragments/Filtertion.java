@@ -306,4 +306,5 @@ public class Filtertion extends Fragment {
         super.onAttach(context);
         TabsLayouts.Visablty = false;
     }
+
 }

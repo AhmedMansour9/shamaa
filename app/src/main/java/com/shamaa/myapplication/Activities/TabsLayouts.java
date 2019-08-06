@@ -1,15 +1,20 @@
 package com.shamaa.myapplication.Activities;
 
+import am.appwise.components.ni.NoInternetDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 import com.shamaa.myapplication.Fragments.Cart;
@@ -22,16 +27,31 @@ import com.shamaa.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TabsLayouts extends AppCompatActivity {
     public static TabLayout tabLayout;
     private ViewPager viewPager;
     View view,view1,view2,view3,view4;
     public static Boolean Visablty;
+    SharedPreferences shared;
+    NoInternetDialog noInternetDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        shared=getSharedPreferences("Language",MODE_PRIVATE);
+        String Lan=shared.getString("Lann",null);
+        if(Lan!=null) {
+            Locale locale = new Locale(Lan);
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.locale = locale;
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+        }
         setContentView(R.layout.activity_tabs_layouts);
+         noInternetDialog = new NoInternetDialog.Builder(this).build();
+
         ButterKnife.bind(this);
         viewPager =findViewById(R.id.viewpager);
         tabLayout =findViewById(R.id.tabs);
@@ -66,7 +86,7 @@ public class TabsLayouts extends AppCompatActivity {
             }
         });
     }
-    class ViewPagerAdapter extends FragmentPagerAdapter {
+    class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
         public ViewPagerAdapter(FragmentManager manager) {
@@ -89,6 +109,10 @@ public class TabsLayouts extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
+        }
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            // TODO Auto-generated method stub
         }
     }
 
@@ -127,18 +151,24 @@ public class TabsLayouts extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        int index = tabLayout.getSelectedTabPosition();
-//        if(Visablty) {
-//            if (index != 0) {
-//                tabLayout.getTabAt(0).select();
-//            } else {
-//                super.onBackPressed();
-//            }
-//        }else {
-//            super.onBackPressed();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        int index = tabLayout.getSelectedTabPosition();
+        if(Visablty) {
+            if (index != 0) {
+                tabLayout.getTabAt(0).select();
+            } else {
+                super.onBackPressed();
+            }
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        noInternetDialog.onDestroy();
+
+    }
 }

@@ -47,7 +47,6 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:id="@+id/T_CategoryName"
-            android:text="Gemstones"
             android:layout_below="@+id/toolbarproduct"
             android:textColor="#000"
             android:textSize="@dimen/_16sdp"

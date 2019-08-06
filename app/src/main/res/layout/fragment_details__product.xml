@@ -169,7 +169,7 @@
         android:id="@+id/rel"
         android:background="@drawable/bcspinner"
         android:orientation="horizontal">
-    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+    <com.shamaa.myapplication.CustomSearchableSpinner
         android:id="@+id/Style_Spinner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -178,7 +178,7 @@
         android:theme="@style/AppTheme"
         app:backgroundTint="#707070">
 
-    </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+    </com.shamaa.myapplication.CustomSearchableSpinner>
     </RelativeLayout>
 
     <RelativeLayout
@@ -191,7 +191,7 @@
         android:id="@+id/rel2"
         android:background="@drawable/bcspinner"
         android:orientation="horizontal">
-        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        <com.shamaa.myapplication.CustomSearchableSpinner
             android:id="@+id/Size_Spinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
@@ -200,7 +200,7 @@
             app:backgroundTint="#707070">
 
 
-        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+        </com.shamaa.myapplication.CustomSearchableSpinner>
     </RelativeLayout>
 
        <Button

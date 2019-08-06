@@ -171,4 +171,10 @@ public class MyOrders_Fragment extends Fragment implements OrderId,SwipeRefreshL
         super.onAttach(context);
         TabsLayouts.Visablty = false;
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        TabsLayouts.Visablty = true;
+    }
 }

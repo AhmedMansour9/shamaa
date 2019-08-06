@@ -63,6 +63,8 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
     GifImageView progross;
     @BindView(R.id.swipe_Products)
     SwipeRefreshLayout swipe_Products;
+    @BindView(R.id.T_CategoryName)
+    TextView T_CategoryName;
    String Id,UserToken;
     String Type_id,Style_id,minprice,maxprice,man;
     Boolean getValue;
@@ -101,6 +103,7 @@ public class Products extends Fragment implements DetailsProduct_id,SwipeRefresh
            maxprice=getArguments().getString("maxprice");
        }else {
            Id=bundle.getString("id");
+           T_CategoryName.setText(bundle.getString("name"));
        }
 
         T_Filtertion.setOnClickListener(new View.OnClickListener() {

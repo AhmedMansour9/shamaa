@@ -62,6 +62,20 @@
     <string name="cotune">המשך</string>
     <string name="cash">כסף מזומן</string>
     <string name="debit">ויזה</string>
-
+    <string name="orders">הזמנות</string>
+    <string name="products">מוצרים</string>
+    <string name="name">שם</string>
+    <string name="message">הודעה</string>
+    <string name="sendmsg">לשלוח הודעה</string>
+    <string name="sendsuccess">ההודעה נשלחה</string>
+    <string name="failedmsg">נכשל, יש משהו לא בסדר</string>
+    <string name="confirm">אשר</string>
+    <string name="updated">המידע עודכן בהצלחה</string>
+    <string name="order">ההזמנה נוצרה בהצלחה</string>
+    <string name="orderid">מספר הזמנה</string>
+    <string name="offer">% הצעה</string>
+    <string name="english">English</string>
+    <string name="herbian">עברית</string>
+    <string name="language">שפה</string>
 
 </resources>
