@@ -28,7 +28,6 @@
     <string name="logout">Log out</string>
     <string name="productdetails">Product Details</string>
     <string name="minpassword">Password Must be at least 8 letters</string>
-    <string name="insertemail">please Insert Valid Email</string>
     <string name="matchpass">Password Not Match</string>
     <string name="emailfailed">Email Or User Name is Used</string>
     <string name="registersuccess">Successfully Registered</string>
@@ -75,5 +74,12 @@
     <string name="english">English</string>
     <string name="herbian">Hebrew</string>
     <string name="language">Language</string>
+    <string name="reset">Reset</string>
+    <string name="sendreset">Check your Email to reset Password</string>
+    <string name="insertpass">Please Insert Password</string>
+    <string name="insertconfirm">Please Insert ConFirm Password</string>
+    <string name="insertemail">Please Insert Email</string>
+    <string name="insertfullname">Please Insert FullName</string>
+    <string name="insertphone">Please Insert Phone</string>
 
 </resources>

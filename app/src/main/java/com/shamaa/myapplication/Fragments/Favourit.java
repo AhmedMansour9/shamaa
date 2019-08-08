@@ -68,6 +68,8 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
     @BindView(R.id.nocart)
     TextView nocart;
     String Lang;
+    Context context;
+    Boolean refresh=true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         view= inflater.inflate(R.layout.fragment_favourit, container, false);
         ButterKnife.bind(this,view);
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
+        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
+        context=this.getActivity();
         Language();
         init();
         SwipRefresh();
@@ -91,10 +95,12 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
 
     }
     public void Get_products(){
-        swipe_Products.setRefreshing(true);
-        ReLa_Products.setAlpha(0.3f);
-        progross.setVisibility(View.VISIBLE);
-        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
+        if(refresh) {
+            swipe_Products.setRefreshing(true);
+            ReLa_Products.setAlpha(0.3f);
+            progross.setVisibility(View.VISIBLE);
+        }
+
         tripsViewModel.getFavourit(UserToken,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
@@ -102,6 +108,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
                 swipe_Products.setRefreshing(false);
                 ReLa_Products.setAlpha(1f);
                 if(tripsData!=null) {
+                    recyclerProducts.setVisibility(View.VISIBLE);
                     products_Adapter = new Favourit_Adapter(tripsData, getActivity());
                     products_Adapter.setOnClicklistner(Favourit.this);
                     recyclerProducts.setAdapter(products_Adapter);
@@ -111,7 +118,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
                 }else {
                     img_cart.setVisibility(View.VISIBLE);
                     nocart.setVisibility(View.VISIBLE);
-
+                    recyclerProducts.setVisibility(View.GONE);
                 }
 
             }
@@ -182,6 +189,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
 
     @Override
     public void onRefresh() {
+        refresh=true;
         Get_products();
 
     }
@@ -199,6 +207,10 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
         super.setMenuVisibility(visible);
         if (visible) {
             TabsLayouts.Visablty = true;
+            if(context!=null) {
+                refresh=false;
+                Get_products();
+            }
         } else {
 
         }
@@ -213,6 +225,7 @@ public class Favourit extends Fragment implements DetailsProduct_id,SwipeRefresh
     public void onDetach() {
         super.onDetach();
         TabsLayouts.Visablty = true;
+        context=null;
     }
 
 }

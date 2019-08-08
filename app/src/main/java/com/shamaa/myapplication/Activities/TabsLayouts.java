@@ -110,10 +110,10 @@ public class TabsLayouts extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            // TODO Auto-generated method stub
-        }
+//        @Override
+//        public void destroyItem(ViewGroup container, int position, Object object) {
+//            // TODO Auto-generated method stub
+//        }
     }
 
     private void setupTabIcons() {

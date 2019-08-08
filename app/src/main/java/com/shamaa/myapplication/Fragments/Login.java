@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fourhcode.forhutils.FUtilsValidation;
+import com.shamaa.myapplication.Activities.Reset_Password;
 import com.shamaa.myapplication.Activities.Splash;
 import com.shamaa.myapplication.Activities.TabsLayouts;
 import com.shamaa.myapplication.Adapter.Products_Adapter;
@@ -82,6 +83,8 @@ public class Login extends Fragment  {
     EditText E_Email_Register;
     @BindView(R.id.E_ConfirmPassword)
     EditText E_ConfirmPassword;
+    @BindView(R.id.forget)
+    TextView forget;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,7 +97,13 @@ public class Login extends Fragment  {
         Login_OnCilck();
         Login();
         Register();
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), Reset_Password.class));
 
+            }
+        });
 
       return view;
     }
@@ -103,8 +112,8 @@ public class Login extends Fragment  {
         Btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FUtilsValidation.isEmpty(E_Email_Login,"");
-                FUtilsValidation.isEmpty(E_Password,"");
+                FUtilsValidation.isEmpty(E_Email_Login, getActivity().getString(R.string.insertemail));
+                FUtilsValidation.isEmpty(E_Password, getActivity().getString(R.string.insertpass));
                 FUtilsValidation.isLengthCorrect(E_Password.getText().toString(), 8, 16);
                 if (!E_Email_Login.getText().toString().equals("")
                         && !E_Password.getText().toString().equals("")
@@ -148,11 +157,11 @@ public class Login extends Fragment  {
         Sign_Up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FUtilsValidation.isEmpty(E_Email_Register, "");
-                FUtilsValidation.isEmpty(E_Full_Name, "");
-                FUtilsValidation.isEmpty(E_Phone, "");
-                FUtilsValidation.isEmpty(E_Password_Register, "");
-                FUtilsValidation.isEmpty(E_ConfirmPassword, "");
+                FUtilsValidation.isEmpty(E_Email_Register, getActivity().getString(R.string.insertemail));
+                FUtilsValidation.isEmpty(E_Full_Name, getActivity().getString(R.string.insertfullname));
+                FUtilsValidation.isEmpty(E_Phone, getActivity().getString(R.string.insertphone));
+                FUtilsValidation.isEmpty(E_Password_Register, getActivity().getString(R.string.insertpass));
+                FUtilsValidation.isEmpty(E_ConfirmPassword, getActivity().getString(R.string.insertconfirm));
                 FUtilsValidation.isLengthCorrect(E_Password_Register.getText().toString(), 8, 16);
                 FUtilsValidation.isLengthCorrect(E_ConfirmPassword.getText().toString(), 8, 16);
 

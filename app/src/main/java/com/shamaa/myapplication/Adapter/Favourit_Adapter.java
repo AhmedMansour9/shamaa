@@ -96,13 +96,13 @@ public class Favourit_Adapter extends RecyclerView.Adapter<Favourit_Adapter.MyVi
         holder.T_Caliber.setText(filteredList.get(position).getCaliber());
         value = Double.parseDouble(filteredList.get(position).getOriginalPrice());
         value = Double.parseDouble(new DecimalFormat("##.####").format(value));
-        holder.T_OfferPrice.setText(String.valueOf(value));
-        holder.T_OfferPrice.setPaintFlags(holder.T_OfferPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         value2 = Double.parseDouble(filteredList.get(position).getSalesPrice());
         value2 = Double.parseDouble(new DecimalFormat("##.####").format(value2));
-        holder.T_Price.setText(String.valueOf(value2)+" "+con.getResources().getString(R.string.currency));
+        holder.T_Price.setText(String.valueOf(value)+" "+con.getResources().getString(R.string.currency));
 
+        holder.T_OfferPrice.setText(String.valueOf(value2));
+        holder.T_OfferPrice.setPaintFlags(holder.T_OfferPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
 
         if (!filteredList.get(position).getOffer().equals("0")) {
@@ -139,6 +139,7 @@ public class Favourit_Adapter extends RecyclerView.Adapter<Favourit_Adapter.MyVi
         holder.Img_Favourit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.Img_Favourit.setEnabled(false);
                 if (filteredList.get(position).getFavorite().equals("1")) {
                     filteredList.get(position).setFavorite("0");
                     holder.Img_Favourit.setBackgroundResource(R.drawable.ic_favourit);

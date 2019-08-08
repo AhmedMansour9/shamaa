@@ -16,6 +16,7 @@ import com.shamaa.myapplication.Model.OrdersDetails_Response;
 import com.shamaa.myapplication.Model.Products_Response;
 import com.shamaa.myapplication.Model.Profile_Response;
 import com.shamaa.myapplication.Model.RegisterResponse;
+import com.shamaa.myapplication.Model.Reset_Response;
 import com.shamaa.myapplication.Model.SizeByid_Response;
 import com.shamaa.myapplication.Model.Style_Response;
 import com.shamaa.myapplication.Model.UpdateCart_Response;
@@ -38,6 +39,11 @@ public interface Apiinterface {
 
     @POST("login")
     Call<RegisterResponse> login(@QueryMap Map<String, String> queryMab);
+
+    @POST("forget/pass")
+    Call<Reset_Response> Resent(@QueryMap Map<String, String> queryMab);
+
+
     @POST("register")
     Call<RegisterResponse> register(@QueryMap Map<String,String> queryMab);
 

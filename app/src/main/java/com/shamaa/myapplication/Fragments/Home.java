@@ -88,6 +88,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
     final Handler handler = new Handler();
     int position = 0;
     Boolean end;
+    Context context;
     final Runnable update = new Runnable() {
         public void run() {
             if(position == listBanners.size()-1){
@@ -112,14 +113,17 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
+        context=this.getActivity();
         cartViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
+        categories_viewModel = ViewModelProviders.of(this).get(Categories_ViewModel.class);
+        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
         Language();
         init();
         SwipRefresh();
         return view;
     }
     public void Get_Categories(){
-        categories_viewModel = ViewModelProviders.of(this).get(Categories_ViewModel.class);
+
         categories_viewModel.getCetgroies(User_Token,Lang,getContext()).observe(this, new Observer<List<Categories>>() {
             @Override
             public void onChanged(@Nullable List<Categories> tripsData) {
@@ -152,7 +156,7 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
     public void Get_products(){
         Scroll_Home.setAlpha(0.3f);
         progross.setVisibility(View.VISIBLE);
-        tripsViewModel = ViewModelProviders.of(this).get(Products_ViewModel.class);
+
         tripsViewModel.getDiamondss(User_Token,Lang,getContext()).observe(this, new Observer<List<Products_Model>>() {
             @Override
             public void onChanged(@Nullable List<Products_Model> tripsData) {
@@ -292,8 +296,14 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
         super.setMenuVisibility(visible);
         if (visible) {
             TabsLayouts.Visablty = true;
-        } else {
 
+            if(context!=null){
+                Get_Categories();
+                Get_Banners();
+                Get_products();
+            }
+        } else {
+            context=null;
         }
 
     }
@@ -301,5 +311,11 @@ public class Home extends Fragment implements DetailsProduct_id,SubCategoryid_Vi
     public void onAttach(Context context) {
         super.onAttach(context);
         TabsLayouts.Visablty = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        context=null;
     }
 }

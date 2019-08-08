@@ -131,6 +131,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/bs_spinner_search"
             android:hint="@string/fullname"
+            android:digits="abcdefghijklmnopqrs tuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:paddingStart="@dimen/_15sdp"
             android:textColorHint="#bcbcbc"
             android:id="@+id/E_Full_Name"

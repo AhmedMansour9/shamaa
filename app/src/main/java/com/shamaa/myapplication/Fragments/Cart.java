@@ -83,6 +83,8 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
     Button Btn_Checkout;
     String Lang;
     UpdateCart_ViewModel updateCart_viewModel;
+    Context context;
+    Boolean refresh=true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,6 +92,8 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
         view= inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this,view);
         updateCart_viewModel = ViewModelProviders.of(this).get(UpdateCart_ViewModel.class);
+        tripsViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
+        context=this.getActivity();
         Language();
         UserToken= SharedPrefManager.getInstance(getContext()).getUserToken();
         init();
@@ -120,9 +124,10 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
 
     }
     public void Get_products(){
-        ReLa_Products.setAlpha(0.3f);
-        progross.setVisibility(View.VISIBLE);
-        tripsViewModel = ViewModelProviders.of(this).get(Cart_ViewModel.class);
+        if(refresh) {
+            ReLa_Products.setAlpha(0.3f);
+            progross.setVisibility(View.VISIBLE);
+        }
 
         tripsViewModel.getCart(UserToken,Lang,getContext()).observe(this, new Observer<List<CartDetails>>() {
             @Override
@@ -181,6 +186,7 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
     @Override
     public void onRefresh() {
         swipe_Products.setRefreshing(false);
+
         Get_products();
     }
 
@@ -262,6 +268,10 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
         super.setMenuVisibility(visible);
         if (visible) {
             TabsLayouts.Visablty = true;
+            refresh=false;
+            if(context!=null) {
+                Get_products();
+            }
         } else {
 
         }
@@ -271,5 +281,11 @@ public class Cart extends Fragment implements Count_View,DetailsProduct_id,Swipe
     public void onAttach(Context context) {
         super.onAttach(context);
         TabsLayouts.Visablty = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        context=null;
     }
 }

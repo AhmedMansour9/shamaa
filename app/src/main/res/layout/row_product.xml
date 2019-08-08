@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_145sdp"
+    android:layout_width="@dimen/_140sdp"
     android:background="@drawable/bc_rowproduct"
     android:id="@+id/Rela_Product"
     android:layout_height="wrap_content">

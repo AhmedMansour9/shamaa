@@ -30,7 +30,6 @@
     <string name="logout">להתנתק</string>
     <string name="productdetails">פרטי מוצר</string>
     <string name="minpassword">סיסמא חייבת להיות לפחות 8 אותיות</string>
-    <string name="insertemail">אנא הכנס דוא"ל תקף</string>
     <string name="matchpass">סיסמא לא תואמת</string>
     <string name="emailfailed">משתמשים בדוא"ל או בשם המשתמש</string>
     <string name="registersuccess">נרשם בהצלחת</string>
@@ -77,5 +76,12 @@
     <string name="english">English</string>
     <string name="herbian">עברית</string>
     <string name="language">שפה</string>
+    <string name="reset">לאפס</string>
+    <string name="sendreset">בדוק את הדוא"ל שלך כדי לאפס את הסיסמה</string>
+    <string name="insertpass">אנא הכנס סיסמא</string>
+    <string name="insertconfirm">אנא הכנס אישור סיסמא</string>
+    <string name="insertemail">אנא הכנס דוא"ל</string>
+    <string name="insertfullname">אנא הכנס שם מלא</string>
+    <string name="insertphone">אנא הכנס טלפון</string>
 
 </resources>
